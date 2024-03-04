@@ -1,0 +1,180 @@
+.auth-wrapper {
+  max-width: 639px;
+  padding: 60px 33px 40px;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 0 9px rgba(17, 29, 94, 0.2);
+}
+.auth-wrapper .auth-top {
+  text-align: center;
+}
+.auth-wrapper .auth-top .auth-logo {
+  margin-bottom: 15px;
+}
+.auth-wrapper .auth-top .auth-logo img {
+  max-width: 100%;
+}
+@media (max-width: 450px) {
+  .auth-wrapper .auth-top .auth-logo img {
+    height: 45px;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+}
+.auth-wrapper .auth-top .cmn--btn {
+  background: var(--title);
+  color: var(--white);
+}
+.auth-wrapper .cmn--btn.form-control {
+  height: 51px;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 500;
+  background: black;
+  color: var(--white);
+}
+.auth-wrapper .cmn--btn.form-control:hover {
+  background: black;
+  color: var(--white) !important;
+}
+@media (max-width: 767px) {
+  .auth-wrapper {
+    padding: 35px 30px 30px;
+  }
+}
+@media (max-width: 450px) {
+  .auth-wrapper {
+    padding: 30px 15px 30px;
+  }
+}
+.auth-wrapper.change-pass {
+  max-width: 680px;
+}
+
+.auto-tab {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  margin: 10px 0 20px;
+  border: none;
+}
+.auto-tab li {
+  list-style: none;
+  font-size: 16px;
+  margin-top: 5px;
+  cursor: pointer;
+  text-align: center;
+  padding: 0 7px;
+}
+.auto-tab li span {
+  display: block;
+  margin-bottom: -5px;
+}
+.auto-tab li svg {
+  display: none;
+}
+.auto-tab li.active {
+  font-weight: 600;
+  color: var(--title);
+}
+.auto-tab li.active svg {
+  display: inline-block;
+}
+@media (max-width: 575px) {
+  .auto-tab li {
+    margin-top: 5px;
+    font-size: 14px;
+    padding: 0 10px;
+  }
+}
+@media (max-width: 374px) {
+  .auto-tab li {
+    margin-top: 5px;
+    font-size: 13px;
+    padding: 0 5px;
+  }
+}
+
+.input--group {
+  position: relative;
+}
+.input--group .form-control {
+  height: 51px;
+  background: #f4f6f9;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  color: var(--title);
+  font-weight: 500;
+  padding: 0 50px 0 18px;
+  font-size: 14px;
+}
+.input--group .form-control::-moz-placeholder {
+  color: var(--title);
+  font-weight: 500;
+}
+.input--group .form-control::placeholder {
+  color: var(--title);
+  font-weight: 500;
+}
+.input--group .icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50px;
+  height: 51px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--base);
+}
+.input--group:not(:last-child) {
+  margin-bottom: 35px;
+}
+
+.signup-option {
+  font-size: 16px;
+}
+.signup-option a {
+  font-weight: 600;
+  color: var(--title);
+}
+
+.remember-checkbox .form-check {
+  display: flex;
+  align-items: center;
+}
+.remember-checkbox .form-check input[type=checkbox] {
+  height: 16px;
+  width: 16px;
+  top: 0;
+  align-self: center;
+  transform: translateY(-2px);
+}
+.remember-checkbox .form-check-label {
+  margin: 0;
+  padding-left: 10px;
+  font-size: 16px;
+  color: var(--title);
+}
+.remember-checkbox .forget-link {
+  color: var(--title);
+  font-weight: 500;
+}
+
+@media screen and (max-width: 575px) {
+  .auth-section {
+    padding: 40px 0;
+  }
+}
+
+button,
+label {
+  cursor: pointer;
+}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+  display: none;
+}/*# sourceMappingURL=Auth.css.map */

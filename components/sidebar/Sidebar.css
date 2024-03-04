@@ -1,0 +1,130 @@
+.input--group .form-control {
+  padding-right: 60px;
+  font-weight: 400;
+}
+.input--group .form-control::-moz-placeholder {
+  color: var(--text);
+}
+.input--group .form-control::placeholder {
+  color: var(--text);
+}
+.input--group .icon {
+  background: transparent;
+  color: var(--title);
+  font-size: 16px;
+}
+
+.widget {
+  background: #f4f6f9;
+  padding: 30px;
+}
+.widget .subtitle {
+  margin-bottom: 10px;
+}
+.widget .input--group .form-control {
+  background: var(--white);
+}
+.widget:not(:last-child) {
+  margin-bottom: 24px;
+}
+.widget .list {
+  padding: 5px 0 0;
+  margin: 0;
+  margin-bottom: -5px;
+}
+.widget .list li {
+  list-style: none;
+}
+.widget .list li a {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  color: var(--text);
+}
+.widget .list li a svg {
+  font-size: 12px;
+}
+.widget .list li a:hover {
+  padding-left: 2px;
+  color: var(--base);
+}
+.widget .list li span {
+  transition: all ease 0.3s;
+}
+@media (max-width: 420px) {
+  .widget {
+    padding: 25px 15px;
+  }
+}
+
+.related-posts {
+  padding: 10px 0 0;
+  margin: 0;
+}
+.related-posts li {
+  padding: 15px 0;
+  list-style: none;
+}
+.related-posts li:not(:last-child) {
+  border-bottom: 1px solid rgba(221, 221, 221, 0.8666666667);
+}
+.related-posts li:first-child {
+  padding-top: 0;
+}
+.related-posts li:last-child {
+  padding-bottom: 0;
+}
+.related-posts li a {
+  display: flex;
+  align-items: center;
+}
+.related-posts li a img {
+  height: 80px;
+  width: 90px;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+.related-posts li a h5 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.related-posts li a .content {
+  padding-left: 15px;
+}
+.related-posts li a .content span {
+  color: var(--base);
+}
+.related-posts li a .content span svg {
+  margin-right: 4px;
+}
+@media (max-width: 420px) {
+  .related-posts li a .content h5 {
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: clip;
+  }
+}
+
+.icon-rotate {
+  transform: rotate(90deg);
+}
+
+.sub-cate {
+  animation: fadeInUp 0.4s;
+  -webkit-animation: fadeInUp 0.4s;
+  -moz-animation: fadeInUp 0.4s;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} /*# sourceMappingURL=Sidebar.css.map */
