@@ -1,15 +1,21 @@
-import { FaInstagram, FaPhoneAlt } from 'react-icons/fa'
-import { IoMdMail } from 'react-icons/io'
-import { Link } from 'react-router-dom'
-import footer__bg from '../assets/images/banner/EM_s.png'
-import ISO_Mark from '../assets/images/logo/ISO.png'
-import footer_logo from '../assets/images/logo/KATON_LOGO_WHITE.png'
+import {
+  FaInstagram,
+  FaPhoneAlt,
+  FaFacebookF,
+  FaTwitter,
+} from "react-icons/fa";
+import { IoMdMail } from "react-icons/io";
+import Link from "next/link";
+import footer__bg from "@/assets/images/banner/EM_s.png";
+import ISO_Mark from "@/assets/images/logo/ISO.png";
+import footer_logo from "@/assets/images/logo/KATON_LOGO_WHITE.png";
+import Image from "next/image";
 
 const Footer = () => {
   return (
     <>
       <footer
-        className="section-overlay"
+        className="footer_bg_img section-overlay"
         style={{
           background: `url(${footer__bg}) no-repeat center center / cover`,
         }}
@@ -17,12 +23,12 @@ const Footer = () => {
         <div className="container">
           <div className="footer-wrapper">
             <div className="footer-widget widget-about">
-              <Link to="/" className="footer-logo">
-                <img src={footer_logo} alt="" />
+              <Link href="/" className="footer-logo">
+                <Image src={footer_logo} alt="" />
               </Link>
             </div>
             <div className="footer-widget widget-links">
-              <Link to="/fcontact_us">
+              <Link href="/fcontact_us">
                 <h6 className="subtitle">Contact Us</h6>
               </Link>
               <ul className="adress">
@@ -42,7 +48,7 @@ const Footer = () => {
                   <span className="map-icon">
                     <FaPhoneAlt />
                   </span>
-                  <a href="tel:0800790555" target="_blank" rel="noreferrer">
+                  <span href="tel:0800790555" target="_blank" rel="noreferrer">
                     Toll Free: 0800790555
                     <br />
                     <a
@@ -52,7 +58,7 @@ const Footer = () => {
                     >
                       <span className="tel">Mobile: +233 509803458</span>
                     </a>
-                  </a>
+                  </span>
                 </li>
               </ul>
             </div>
@@ -66,17 +72,17 @@ const Footer = () => {
               </a>
             </div>
             <div className="footer-widget widget-links">
-              <Link to="/faq">
+              <Link href="/faq">
                 <h6 className="subtitle">FAQ</h6>
               </Link>
             </div>
             <div className="footer-widget widget-links">
-              <Link to="/terms-of-use">
+              <Link href="/terms-of-use">
                 <h6 className="subtitle">T&C</h6>
               </Link>
             </div>
             <div className="footer-widget widget-address">
-              <Link to="/privacy-policy">
+              <Link href="/privacy-policy">
                 <h6 className="subtitle">Privacy Policy</h6>
               </Link>
               <div className="follow-us-of">
@@ -88,7 +94,7 @@ const Footer = () => {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <i class="fa-brands fa-facebook-f"></i>
+                      <FaFacebookF />
                     </a>
                   </li>
                   <li>
@@ -106,11 +112,11 @@ const Footer = () => {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <i class="fa-brands fa-twitter"></i>
+                      <FaTwitter />
                     </a>
                   </li>
                   <li>
-                    <img className="iso_mark" src={ISO_Mark} alt="" />
+                    <Image className="iso_mark" src={ISO_Mark} alt="" />
                   </li>
                 </ul>
               </div>
@@ -123,7 +129,7 @@ const Footer = () => {
         Powered by <b>TLMS GLOBAL</b>. All rights Reserved.
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

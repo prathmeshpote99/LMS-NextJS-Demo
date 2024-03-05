@@ -90,10 +90,10 @@ const StudentCommonEditForm = (props) => {
       studentData.st_profilePic = imageList[0]?.file
       const response = await updateProfilePicture(studentData)
       fetchStudentForEdit()
-      localStorage.setItem(
+      typeof window !== "undefined" ? localStorage.setItem(
         'profilePic',
         response.data.student[1][0].st_profilePic,
-      )
+      ) : null
       window.dispatchEvent(new Event('storage'))
       let message = 'Profile pic uploaded successfully'
       setImages(imageList)
@@ -275,7 +275,7 @@ const StudentCommonEditForm = (props) => {
       teacherData.tc_profilePic = imageList[0]?.file
       const response = await updateProfilePictureTeacher(teacherData)
       fetchTeacherForEdit()
-      localStorage.setItem('profilePic', response.data.teacher.tc_profilePic)
+      typeof window !== "undefined" ? localStorage.setItem('profilePic', response.data.teacher.tc_profilePic) : null
       window.dispatchEvent(new Event('storage'))
       let message = 'Profile pic uploaded successfully'
       setImages(imageList)
@@ -307,7 +307,7 @@ const StudentCommonEditForm = (props) => {
 
       teacherProfile['tc_profilePic_old'] = teacherProfile['tc_profilePic']
       teacherProfile['tc_profilePic'] = { fileName: '', file: {} }
-      localStorage.setItem('profilePic', teacherProfile['tc_profilePic_old'])
+      typeof window !== "undefined" ? localStorage.setItem('profilePic', teacherProfile['tc_profilePic_old']) : null
 
       let { tc_region, tc_district, tc_circuit } = teacherProfile
       let areaValue = ''

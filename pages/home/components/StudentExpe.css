@@ -1,0 +1,71 @@
+.experience {
+  height: 55vh;
+  text-align: center;
+  background-color: #eeebe1;
+}
+
+.headingT {
+  padding-top: 5%;
+}
+
+.typography {
+  color: black;
+  text-align: justify;
+}
+
+.Cback {
+  padding: 0% 2%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin-left: 4%;
+  width: 28vw;
+  background-color: white;
+}
+
+.Cbacks {
+  padding: 0% 2%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin-left: 1%;
+  width: 28vw;
+  background-color: white;
+}
+
+#recipeCarousel {
+  width: 95%;
+}
+.carousel-control-prev {
+  color: black;
+}
+.carousel-control-prev:hover {
+  color: black;
+}
+.carousel-control-next {
+  color: black;
+}
+.carousel-control-next:hover {
+  color: black;
+}
+
+.name {
+  color: black;
+}
+
+.firstd {
+  display: inline-flex;
+}
+
+.expeCard {
+  height: 100%;
+  border-radius: 0px !important;
+  width: 98% !important;
+  padding: 0% 5%;
+  border: none;
+  box-shadow: 1px 0px 10px hsl(0deg 0% 49.61% / 15%);
+}
+
+.MdNavigateNext {
+  font-size: 50px;
+}
+
+.MdNavigateBefore {
+  font-size: 50px;
+}

@@ -11,7 +11,7 @@ const AuthContextProvider = (props) => {
     setAuthenticated(true)
   }
   const setLogout = () => {
-    localStorage.removeItem('authToken')
+    typeof window !== "undefined" ? localStorage.removeItem('authToken') : null
     setAuthenticated(false)
     setTemp(!temp)
   }

@@ -17,27 +17,27 @@ export const LoginAlert = async (nav) => {
 }
 
 export const getAuthToken = () => {
-  return localStorage.getItem('authToken') || ''
+  return typeof window !== "undefined" ? localStorage.getItem('authToken') : null
 }
 
 export const setAuthToken = (token) => {
   if (!token) {
     return false
   }
-  localStorage.setItem('authToken', token)
+  typeof window !== "undefined" ? localStorage.setItem('authToken', token) : null
   return true
 }
 
 export const removeAuthInfo = () => {
-  localStorage.removeItem('authToken')
-  localStorage.removeItem('userInfo')
-  localStorage.removeItem('profilePic')
-  localStorage.removeItem('fullUserInfo')
+  typeof window !== "undefined" ? localStorage.removeItem('authToken') : null
+  typeof window !== "undefined" ? localStorage.removeItem('userInfo') : null
+  typeof window !== "undefined" ? localStorage.removeItem('profilePic') : null
+  typeof window !== "undefined" ? localStorage.removeItem('fullUserInfo') : null
   return true
 }
 
 export const getUserInfo = () => {
-  let userInfo = localStorage.getItem('userInfo')
+  let userInfo = typeof window !== "undefined" ? localStorage.getItem('userInfo') : null
   return userInfo ? JSON.parse(userInfo) : null
 }
 
@@ -47,7 +47,7 @@ export const setUserInfo = (userInfo) => {
   }
 
   userInfo = JSON.stringify(userInfo)
-  localStorage.setItem('userInfo', userInfo)
+  typeof window !== "undefined" ? localStorage.setItem('userInfo', userInfo) : null
   return true
 }
 
@@ -57,17 +57,17 @@ export const setFullUserInfo = (fullUserInfo) => {
   }
 
   fullUserInfo = JSON.stringify(fullUserInfo)
-  localStorage.setItem('fullUserInfo', fullUserInfo)
+  typeof window !== "undefined" ? localStorage.setItem('fullUserInfo', fullUserInfo) : null
   return true
 }
 
 export const getFullUserInfo = () => {
-  let fullUserInfo = localStorage.getItem('fullUserInfo')
+  let fullUserInfo = typeof window !== "undefined" ? localStorage.getItem('fullUserInfo') : null
   return fullUserInfo ? JSON.parse(fullUserInfo) : null
 }
 
 export const removeUserInfo = () => {
-  localStorage.removeItem('userInfo')
+  typeof window !== "undefined" ? localStorage.removeItem('userInfo') : null
   return true
 }
 

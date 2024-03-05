@@ -48,57 +48,57 @@ const AttentionForm = (props) => {
       `${signedFormFooterImage}`,
     )
     return `
-    <div class="row px-5 attension-form" id="attension-form">
-    <div class="col-md-12 d-flex justify-content-end mb-5">
-      <img class='img-fluid' src='${katonLogo}' alt=""></img>
+    <div className="row px-5 attension-form" id="attension-form">
+    <div className="col-md-12 d-flex justify-content-end mb-5">
+      <img className='img-fluid' src='${katonLogo}' alt=""></img>
     </div>
-    <div class="col-md-12 mb-5 d-flex flex-column align-items-end">
-      <h3 class="mb-3 ms-auto heading-color">ATTESTATION FORM</h3>
-      <h5 class="ms-auto heading-color">
+    <div className="col-md-12 mb-5 d-flex flex-column align-items-end">
+      <h3 className="mb-3 ms-auto heading-color">ATTESTATION FORM</h3>
+      <h5 className="ms-auto heading-color">
         ICT SKILLS ACQUISITION FOR TEACHERS
       </h5>
     </div>
-    <div class="col-md-12 mb-5">
-      <h6 class="mb-5 default-color">
+    <div className="col-md-12 mb-5">
+      <h6 className="mb-5 default-color">
         I hereby attest that I have completed the ICT SKILLS ACQUISITION FOR
         TEACHERS as well as the Office 365 Teacher Academy and Microsoft
         Innovative Education.
       </h6>
-      <h6 class="default-color">
+      <h6 className="default-color">
         I have been taught, read and understood the subject areas covered
         under the training. Thank you.
       </h6>
     </div>
-    <div class="col-md-12">
-      <div class="d-flex">
-        <h5 class="mb-5 d-inline-block field-title">NAME:</h5>
-        <div class="input-value ms-3">
-          <h5 class="form-field">${fullName}</h5>
+    <div className="col-md-12">
+      <div className="d-flex">
+        <h5 className="mb-5 d-inline-block field-title">NAME:</h5>
+        <div className="input-value ms-3">
+          <h5 className="form-field">${fullName}</h5>
         </div>
       </div>
-      <div class="d-flex">
-        <h5 class="mb-5 d-inline-block field-title">STAFF ID:</h5>
-        <div class="input-value ms-3">
-          <h5 class="form-field">${staffId ? staffId : '-'}</h5>
+      <div className="d-flex">
+        <h5 className="mb-5 d-inline-block field-title">STAFF ID:</h5>
+        <div className="input-value ms-3">
+          <h5 className="form-field">${staffId ? staffId : '-'}</h5>
         </div>
       </div>
-      <div class="d-flex">
-        <h5 class="mb-5 d-inline-block field-title">NAME OF SCHOOL:</h5>
-        <div class="input-value ms-3">
-          <h5 class="form-field">${schoolName ? schoolName : '-'}</h5>
+      <div className="d-flex">
+        <h5 className="mb-5 d-inline-block field-title">NAME OF SCHOOL:</h5>
+        <div className="input-value ms-3">
+          <h5 className="form-field">${schoolName ? schoolName : '-'}</h5>
         </div>
       </div>
-      <div class="d-flex">
-        <h5 class="mb-5 d-inline-block field-title">SIGNATURE:</h5>
-        <div class="input-value ms-3">
-          <h5 class="form-field signature text-center" style='font-family:${signatureFontFamily}'>
+      <div className="d-flex">
+        <h5 className="mb-5 d-inline-block field-title">SIGNATURE:</h5>
+        <div className="input-value ms-3">
+          <h5 className="form-field signature text-center" style='font-family:${signatureFontFamily}'>
             ${singnatureText}
           </h5>
         </div>
       </div>
     </div>
-    <div class="col-md-12">
-    <img class='img-fluid mt-4' src='${signedFormFooter}' alt=""></img>
+    <div className="col-md-12">
+    <img className='img-fluid mt-4' src='${signedFormFooter}' alt=""></img>
     </div>
     
   </div>

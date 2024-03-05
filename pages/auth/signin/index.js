@@ -1,22 +1,22 @@
-import ButtonLoader from 'components/Common/ButtonLoader'
-import VerificationForm from 'components/Common/VerificationForm'
+import ButtonLoader from '@/components/Common/ButtonLoader'
+import VerificationForm from '@/components/Common/VerificationForm'
 import { Field, Form, Formik } from 'formik'
 import {
   generateStudentOTPAPI,
   generateTeacherOTPAPI,
-} from 'helpers/backendHelpers/auth'
+} from '@/helpers/backendHelpers/auth'
 import { useContext, useEffect, useState } from 'react'
 import { FaAngleDown, FaUser } from 'react-icons/fa'
 import OtpInput from 'react-otp-input'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import Link from 'next/link'
 import { toast, ToastContainer } from 'react-toastify'
 import * as Yup from 'yup'
-import { AuthContext } from '../../contexts/AuthContext'
+import { AuthContext } from '@/contexts/AuthContext'
 import {
   setAuthToken,
   setFullUserInfo,
   setUserInfo,
-} from '../../helpers/authHelper'
+} from '@/helpers/authHelper'
 import {
   loginParent,
   loginPublisher,
@@ -25,10 +25,10 @@ import {
   reSendOtpSMS,
   verifyOtpAPI,
   verifyStudentOtpAPI,
-} from '../../helpers/backendHelper'
-import './Auth.scss'
-import { InvalidTokenMessage } from './InvalidTokenMessage'
-import PasswordInput from './PasswordInput'
+} from '@/helpers/backendHelper'
+import { InvalidTokenMessage } from '../InvalidTokenMessage'
+import PasswordInput from '../PasswordInput'
+import { useRouter } from 'next/router'
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()
@@ -43,9 +43,8 @@ const SignupSchema = Yup.object().shape({
   ),
 })
 const SignIn = () => {
-  let navigate = useNavigate()
-  let location = useLocation()
-  let name = location?.state?.tabName ? location?.state?.tabName : 'Teacher'
+  const router = useRouter()
+  let name = router?.query?.tabName ? router?.query?.tabName : 'Teacher'
 
   const [error, setError] = useState('')
   const { setLogin, isLoggedIn } = useContext(AuthContext)
@@ -79,7 +78,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/library')
+      router.push('/library')
     } else {
     }
   }, [isLoggedIn])
@@ -238,8 +237,8 @@ const SignIn = () => {
     }
     setLogin()
     setError('')
-    navigate('/library')
-    localStorage.setItem('profilePic', profilePic)
+    router.push('/library')
+    typeof window !== "undefined" ? localStorage.setItem('profilePic', profilePic) : null
   }
 
   const verifyTeacherOtp = async (otpType) => {
@@ -265,7 +264,7 @@ const SignIn = () => {
             autoClose: 2000,
           })
           setTimeout(() => {
-            navigate('/auth/signin')
+            router.push('/auth/signin')
             setRegisterStep(1)
           }, 2000)
         }
@@ -421,7 +420,7 @@ const SignIn = () => {
             autoClose: 2000,
           })
           setTimeout(() => {
-            navigate('/auth/signin')
+            router.push('/auth/signin')
             setRegisterStep(1)
           }, 2000)
         }
@@ -600,7 +599,7 @@ const SignIn = () => {
                                 </label>
                               </div>
                               <Link
-                                to="/auth/reset"
+                                href="/auth/reset"
                                 state={{ forgotPasswordUserType: 'Teacher' }}
                                 className="forget-link"
                               >
@@ -716,7 +715,7 @@ const SignIn = () => {
                                 </label>
                               </div>
                               <Link
-                                to="/auth/reset"
+                                href="/auth/reset"
                                 state={{ forgotPasswordUserType: 'Student' }}
                                 className="forget-link"
                               >
@@ -831,7 +830,7 @@ const SignIn = () => {
                                 </label>
                               </div>
                               <Link
-                                to="/auth/reset"
+                                href="/auth/reset"
                                 state={{ forgotPasswordUserType: 'Parent' }}
                                 className="forget-link"
                               >
@@ -946,7 +945,7 @@ const SignIn = () => {
                                 </label>
                               </div>
                               <Link
-                                to="/auth/reset"
+                                href="/auth/reset"
                                 state={{ forgotPasswordUserType: 'Publisher' }}
                                 className="forget-link"
                               >
@@ -1147,7 +1146,7 @@ const SignIn = () => {
               {/* {registerStep === 1 && (
                 <div className="signup-option text-center mt-4">
                   Don't have any Account?{' '}
-                  <Link to="/auth/signup" state={{ tabName: selectedUser }}>
+                  <Link href="/auth/signup" state={{ tabName: selectedUser }}>
                     Sign up
                   </Link>
                 </div>

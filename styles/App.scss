@@ -1,6 +1,6 @@
 // @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;&display=swap');
 
-@import '../pages/auth/Auth.scss';
+@import "../pages/auth/Auth.scss";
 
 :root {
   --base: #00bee3;
@@ -8,7 +8,7 @@
   --text: #565656;
   --section: #ebebeb;
   --white: #ffffff;
-  --body: 'Poppins', sans-serif;
+  --body: "Poppins", sans-serif;
   --cancel: #ff2a26;
   --cancel-hover: #ab0300;
 }
@@ -38,7 +38,7 @@ body {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
   transition: all ease 0.3s;
 }
 
@@ -222,6 +222,12 @@ p {
   }
 }
 
+.footer_bg_img {
+  background-image: url("../assets/images/banner/EM_s.png");
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
 footer.section-overlay {
   min-height: 350px;
 }
@@ -230,7 +236,7 @@ footer.section-overlay {
   position: relative;
 
   &::before {
-    content: '';
+    content: "";
     inset: 0;
     position: absolute;
     background: #000000ef;
@@ -272,6 +278,10 @@ footer.section-overlay {
 
 .banner-section {
   .banner-item {
+    background-image: url("../assets/images/banner/banner_bgdd.png");
+    background-repeat: no-repeat;
+    background-position: right;
+
     &::before {
       opacity: 1;
       // background: linear-gradient(
@@ -972,10 +982,14 @@ footer.section-overlay {
 }
 
 .feature-section {
+  height: 45rem;
   position: relative;
   overflow: hidden;
 
   .feature-bg {
+    background-image: url("../assets/images/banner/Comp.png");
+    background-repeat: no-repeat;
+    background-position: right;
     position: absolute;
     inset: 0;
   }
@@ -1708,7 +1722,7 @@ footer.section-overlay {
 }
 
 .join-wrapper {
-  div[class*='col'] {
+  div[class*="col"] {
     &:not(:nth-of-type(4n + 4)) {
       border-right: 1px solid rgba(#fff, 0.6);
     }
@@ -1891,7 +1905,7 @@ footer.section-overlay {
     box-shadow: 0 4px 8px rgba(#111, 0.3);
 
     &::before {
-      content: '';
+      content: "";
       inset: 0;
       position: absolute;
       background: var(--base);
@@ -1925,7 +1939,7 @@ footer.section-overlay {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 0 -12px -45px;
+  margin: 0 -12px -60px;
 
   .footer-widget {
     margin: 0 12px 30px;
@@ -1998,7 +2012,7 @@ footer.section-overlay {
 
     img {
       max-width: 100%;
-      // height: 52px;
+      height: 90%;
     }
 
     margin-bottom: 42px;
@@ -2067,7 +2081,7 @@ footer.section-overlay {
     .map-icon {
       font-size: 22px;
       line-height: 1;
-      color: var(--base);
+      color: #aa9c68;
       text-align: center;
     }
 
@@ -2075,7 +2089,7 @@ footer.section-overlay {
 
     span {
       &:not(.map-icon) {
-        padding-left: 0px;
+        padding-left: 3px;
       }
     }
 
@@ -2451,7 +2465,7 @@ option {
   &::before {
     inset: 0;
     position: absolute;
-    content: '';
+    content: "";
     background: linear-gradient(
       90deg,
       #000000 0%,
@@ -2468,7 +2482,7 @@ option {
     margin-bottom: 15px;
 
     &::before {
-      content: '';
+      content: "";
       height: 4px;
       width: 63px;
       border-radius: 4px;
@@ -2478,7 +2492,7 @@ option {
     }
 
     &::after {
-      content: '';
+      content: "";
       height: 4px;
       width: 11px;
       border-radius: 4px;
@@ -2525,7 +2539,7 @@ option {
 
     &:not(:last-child) {
       &::after {
-        content: '/';
+        content: "/";
         display: inline-block;
         margin: 0 8px;
         color: var(--white);
@@ -2603,7 +2617,7 @@ option {
   &::before,
   &::after {
     position: absolute;
-    content: '';
+    content: "";
     width: 100%;
     height: 100%;
     left: 0;
@@ -2999,7 +3013,7 @@ option {
 
       &::before {
         background: var(--base);
-        content: '';
+        content: "";
         inset: 0 0 0 15px;
         opacity: 0.5;
         position: absolute;
@@ -3845,7 +3859,7 @@ body {
   //   // border-bottom: 2px solid black;
   // }
   .input-value .form-field::after {
-    content: '';
+    content: "";
     display: block;
     width: 100%;
     border-bottom: 2px solid black;
@@ -4057,7 +4071,7 @@ body {
   margin-right: 2.5rem !important;
 }
 .feedback-form {
-  input[type='text'] {
+  input[type="text"] {
     height: 40px;
   }
 }
@@ -4181,7 +4195,7 @@ body {
   margin-left: -32px !important;
 }
 
-.radio_input[type='radio'][id^='cb'] {
+.radio_input[type="radio"][id^="cb"] {
   display: none;
 }
 
@@ -4224,7 +4238,7 @@ body {
 .label1:before {
   background-color: white;
   color: white;
-  content: ' ';
+  content: " ";
   display: block;
   border-radius: 50%;
   border: 1px solid grey;
@@ -4242,7 +4256,7 @@ body {
 .label2:before {
   background-color: white;
   color: white;
-  content: ' ';
+  content: " ";
   display: block;
   border-radius: 50%;
   border: 1px solid grey;
@@ -4260,7 +4274,7 @@ body {
 .label3:before {
   background-color: white;
   color: white;
-  content: ' ';
+  content: " ";
   display: block;
   border-radius: 50%;
   border: 1px solid grey;
@@ -4385,60 +4399,240 @@ body {
 }
 
 @font-face {
-  font-family: 'Autography';
-  src: url('../assets/fonts/Autography.otf') format('opentype');
+  font-family: "Autography";
+  src: url("../assets/fonts/Autography.otf") format("opentype");
 }
 
 @font-face {
-  font-family: 'Betterlett';
-  src: url('../assets/fonts/Betterlett.otf') format('opentype');
+  font-family: "Betterlett";
+  src: url("../assets/fonts/Betterlett.otf") format("opentype");
 }
 
 @font-face {
-  font-family: 'Darlington';
-  src: url('../assets/fonts/Darlington.ttf') format('opentype');
+  font-family: "Darlington";
+  src: url("../assets/fonts/Darlington.ttf") format("opentype");
 }
 
 @font-face {
-  font-family: 'Flighty';
-  src: url('../assets/fonts/Flighty.ttf') format('opentype');
+  font-family: "Flighty";
+  src: url("../assets/fonts/Flighty.ttf") format("opentype");
 }
 
 @font-face {
-  font-family: 'HealingFairy';
-  src: url('../assets/fonts/HealingFairyBoldItalic.otf') format('opentype');
+  font-family: "HealingFairy";
+  src: url("../assets/fonts/HealingFairyBoldItalic.otf") format("opentype");
 }
 
 @font-face {
-  font-family: 'JatmikoSignature';
-  src: url('../assets/fonts/JatmikoSignature.ttf') format('opentype');
+  font-family: "JatmikoSignature";
+  src: url("../assets/fonts/JatmikoSignature.ttf") format("opentype");
 }
 
 @font-face {
-  font-family: 'KimberlySignature';
-  src: url('../assets/fonts/KimberlySignature.otf') format('opentype');
+  font-family: "KimberlySignature";
+  src: url("../assets/fonts/KimberlySignature.otf") format("opentype");
 }
 
 @font-face {
-  font-family: 'Pontgraph';
-  src: url('../assets/fonts/Pontgraph.otf') format('opentype');
+  font-family: "Pontgraph";
+  src: url("../assets/fonts/Pontgraph.otf") format("opentype");
 }
 
 @font-face {
-  font-family: 'Radena';
-  src: url('../assets/fonts/Radena.otf') format('opentype');
+  font-family: "Radena";
+  src: url("../assets/fonts/Radena.otf") format("opentype");
 }
 
 @font-face {
-  font-family: 'Reinatha';
-  src: url('../assets/fonts/Reinatha.ttf') format('opentype');
+  font-family: "Reinatha";
+  src: url("../assets/fonts/Reinatha.ttf") format("opentype");
 }
 
 @font-face {
-  font-family: 'SallynaCattalya';
-  src: url('../assets/fonts/SallynaCattalya.ttf') format('opentype');
+  font-family: "SallynaCattalya";
+  src: url("../assets/fonts/SallynaCattalya.ttf") format("opentype");
 }
 @font-face {
-  font-family: 'Creattion';
-  src: url('../assets/fonts/Creattion.otf') format('opentype');
+  font-family: "Creattion";
+  src: url("../assets/fonts/Creattion.otf") format("opentype");
+}
+
+// Sneak Peek Style
+
+$color_1: #aa9c68;
+
+.product_list {
+  list-style-type: circle !important;
+}
+
+.title_peek {
+  color: $color_1;
+  width: "100%";
+}
+.feature_area {
+  li {
+    width: 100%;
+    list-style-type: circle;
+    margin-bottom: 5%;
+  }
+}
+
+// Training Module Style
+
+.module {
+  display: flex;
+  flex-wrap: wrap;
+
+  > .iCol[class*="col-"] {
+    display: flex;
+  }
+}
+
+.card-block {
+  margin-top: 10px;
+  padding: 30px 15px;
+}
+
+.tCard {
+  width: 100%;
+  background-color: #beb07d !important;
+  color: black;
+  font-weight: bold;
+  border-radius: 1rem;
+
+  imG {
+    position: absolute;
+    // border-top-left-radius: 1rem;
+    // border-top-right-radius: 1rem;
+  }
+}
+
+.blackline_div {
+  margin-top: 55%;
+  height: 2vh;
+  background-color: black;
+}
+
+.icon_imG,
+.icon_imG2 {
+  position: relative;
+
+  /* margin-top: 45%;
+  margin-left: 75%;
+  height: 18%;
+  width: 18%; */
+  margin-top: 45%;
+  margin-left: 75%;
+  height: 18% !important;
+  width: 18% !important;
+}
+
+.icon_imGR {
+  border-top-left-radius: 0rem !important;
+  border-top-right-radius: 0rem !important;
+  position: relative;
+
+  /* margin-top: -1%;
+  margin-left: 7%;
+  height: 17%;
+  width: 11%; */
+  margin-top: -1%;
+  margin-left: 7%;
+  height: 17%;
+  width: 11%;
+}
+
+.new {
+  position: absolute;
+  color: white;
+  margin-top: 3%;
+  z-index: 3;
+  margin-left: 7%;
+  height: 10%;
+  width: 15%;
+  font-size: 12px;
+}
+
+.inner_div {
+  font-size: 11px;
+  margin-top: -10%;
+}
+
+.cParagraph {
+  font-size: 12px;
+  margin-top: 8%;
+  width: 100%;
+}
+
+.alarm {
+  height: 15px;
+  width: 15px;
+}
+
+// Student Experience Style
+
+.experience {
+  height: 55vh;
+  text-align: center;
+  background-color: #eeebe1;
+}
+
+.headingT {
+  padding-top: 5%;
+}
+
+.typography {
+  color: black;
+  text-align: justify;
+}
+
+.Cback {
+  padding: 0% 2%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin-left: 4%;
+  width: 28vw;
+  background-color: white;
+}
+
+.Cbacks {
+  padding: 0% 2%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin-left: 1%;
+  width: 28vw;
+  background-color: white;
+}
+
+#recipeCarousel {
+  width: 95%;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  color: black;
+
+  &:hover {
+    color: black;
+  }
+}
+
+.name {
+  color: black;
+}
+
+.firstd {
+  display: inline-flex;
+}
+
+.expeCard {
+  height: 100%;
+  border-radius: 0px !important;
+  width: 98% !important;
+  padding: 0% 5%;
+  border: none;
+  box-shadow: 1px 0px 10px hsl(0deg 0% 49.61% / 15%);
+}
+
+.MdNavigateNext,
+.MdNavigateBefore {
+  font-size: 50px;
 }

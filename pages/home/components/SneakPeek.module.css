@@ -1,0 +1,14 @@
+.product_list {
+  list-style-type: circle !important;
+}
+
+.title_peek {
+  color: #aa9c68;
+  /* color: 'rgb(0, 174, 255)'; */
+  width: '100%';
+}
+
+.feature_area li {
+  width: 100%;
+  list-style-type: circle;
+}

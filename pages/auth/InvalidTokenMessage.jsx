@@ -1,18 +1,23 @@
-import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { Modal, ModalBody, ModalHeader } from 'reactstrap'
 
 export const InvalidTokenMessage = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [showMessage, setShowMessage] = useState(() =>
-    searchParams.get('invalidToken'),
-  )
+  const router = useRouter()
+  const [showMessage, setShowMessage] = useState(false)
+  useEffect(() => {
+    const invalidToken = router.query.invalidToken
+    setShowMessage(!!invalidToken)
+  }, [router.query])
 
   const handleLogin = () => {
     setShowMessage(false)
 
-    searchParams.delete('invalidToken')
-    setSearchParams(searchParams) // updates the state of search params
+    const { invalidToken, ...query } = router.query
+    router.push({
+      pathname: router.pathname,
+      query,
+    })
   }
 
   if (!showMessage) return <></>

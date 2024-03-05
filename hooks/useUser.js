@@ -1,4 +1,4 @@
-export const getToken = () => localStorage.getItem("token");
+export const getToken = () => typeof window !== "undefined" ? localStorage.getItem("token") : null
 
-export const setToken = (token) =>
-	localStorage.setItem("token", `User ${token}`);
+export const setToken = (token) => 
+typeof window !== "undefined" ? localStorage.setItem("token", `User ${token}`) : null

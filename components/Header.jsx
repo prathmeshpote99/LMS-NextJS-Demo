@@ -1,144 +1,148 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { FaAngleDown, FaBars } from 'react-icons/fa'
-import { GrClose } from 'react-icons/gr'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import swal from 'sweetalert'
-import menu from '../assets/images/data/menu'
+import React, { useContext, useEffect, useState } from "react";
+import { FaAngleDown, FaBars } from "react-icons/fa";
+import { GrClose } from "react-icons/gr";
+import Link from "next/link";
+import swal from "sweetalert";
+import menu from "@/assets/images/data/menu";
 import dashboard_header_menu, {
   dashboard_header_student_menu,
-} from '../assets/images/data/menu2'
-import default_icon from '../assets/images/default_avatar.png'
-import logo from '../assets/images/logo/MOE_Logoo.png'
-import { AuthContext } from '../contexts/AuthContext'
-import { getUserInfo, removeAuthInfo } from '../helpers/authHelper'
+} from "@/assets/images/data/menu2";
+import default_icon from "@/assets/images/default_avatar.png";
+import logo from "@/assets/images/logo/MOE_Logoo.png";
+import { AuthContext } from "../contexts/AuthContext";
+import { getUserInfo, removeAuthInfo } from "@/helpers/authHelper";
 import {
   logOutParent,
   logOutPublisher,
   logOutUser,
   logOutfTeacher,
-} from '../helpers/backendHelper'
-import { IMAGE_URL } from '../helpers/urlHelper'
-import LanguageTranslator from './LanguageTranslator'
+} from "@/helpers/backendHelper";
+import { IMAGE_URL } from "@/helpers/urlHelper";
+import LanguageTranslator from "./LanguageTranslator";
+import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Header = (props) => {
-  const navigate = useNavigate()
-  const userInfo = getUserInfo()
-  const location = useLocation()
+  // const navigate = useNavigate()
+  const router = useRouter();
+  const userInfo = getUserInfo();
 
-  const pathName = location.pathname
-  const isLoggedIn = localStorage.getItem('authToken')
+  const pathName = router.pathname;
+  const isLoggedIn =
+    typeof window !== "undefined" ? localStorage.getItem("authToken") : null;
 
-  const [menuOpen, setMenuOpen] = useState(false)
-  const { setLogout } = useContext(AuthContext)
-  const [selectedMenu, setSelectedMenu] = useState('')
-  const [selectedSubMenu, setSelectedSubMenu] = useState('')
-  const [selectedprofileMenu, setSelectedProfileMenu] = useState('')
-  const [newPathName, setNewPathName] = useState(pathName)
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { setLogout } = useContext(AuthContext);
+  const [selectedMenu, setSelectedMenu] = useState("");
+  const [selectedSubMenu, setSelectedSubMenu] = useState("");
+  const [selectedprofileMenu, setSelectedProfileMenu] = useState("");
+  const [newPathName, setNewPathName] = useState(pathName);
 
   const handleMenuClick = () => {
-    setMenuOpen(false)
-  }
+    setMenuOpen(false);
+  };
 
   useEffect(() => {
-    setNewPathName(pathName)
-    if (pathName === '/') {
-      setSelectedMenu('')
-      setSelectedSubMenu('')
-      setSelectedProfileMenu('')
+    setNewPathName(pathName);
+    if (pathName === "/") {
+      setSelectedMenu("");
+      setSelectedSubMenu("");
+      setSelectedProfileMenu("");
     } else {
     }
-  }, [pathName])
+  }, [pathName]);
 
   useEffect(() => {
-    if (newPathName === '/') {
-      setSelectedMenu('')
-      setSelectedSubMenu('')
-      setSelectedProfileMenu('')
+    if (newPathName === "/") {
+      setSelectedMenu("");
+      setSelectedSubMenu("");
+      setSelectedProfileMenu("");
     } else {
-      const separatedPathName = newPathName.split('/').filter(Boolean)
-      setSelectedMenu(separatedPathName[0])
+      const separatedPathName = newPathName.split("/").filter(Boolean);
+      setSelectedMenu(separatedPathName[0]);
       if (separatedPathName) {
-        setSelectedMenu(separatedPathName[0])
+        setSelectedMenu(separatedPathName[0]);
         if (separatedPathName[1]) {
-          setSelectedSubMenu(separatedPathName[1])
+          setSelectedSubMenu(separatedPathName[1]);
         }
       }
     }
-  }, [newPathName])
+  }, [newPathName]);
 
   useEffect(() => {
-    let pathUrl = window.location.href
-    if (pathUrl.match('/')) {
-      return
+    let pathUrl = window.location.href;
+    if (pathUrl.match("/")) {
+      return;
     }
 
-    var Tawk_API = Tawk_API || {}
+    var Tawk_API = Tawk_API || {};
 
-    ;(function () {
-      var s1 = document.createElement('script'),
-        s0 = document.getElementsByTagName('script')[0]
-      s1.async = true
-      s1.src = 'https://embed.tawk.to/635118c5daff0e1306d2fe52/1gfqchheg'
-      s1.charset = 'UTF-8'
-      s1.setAttribute('crossorigin', '*')
-      s0.parentNode.insertBefore(s1, s0)
-    })()
-  }, [])
+    (function () {
+      var s1 = document.createElement("script"),
+        s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = "https://embed.tawk.to/635118c5daff0e1306d2fe52/1gfqchheg";
+      s1.charset = "UTF-8";
+      s1.setAttribute("crossorigin", "*");
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  }, []);
 
   const handleLogout = async () => {
-    console.log('pathname1', pathName)
-    const value = await swal('Are you sure you want to logout?', {
+    console.log("pathname1", pathName);
+    const value = await swal("Are you sure you want to logout?", {
       buttons: {
-        defeat: 'Log out',
-        cancel: 'Cancel',
+        defeat: "Log out",
+        cancel: "Cancel",
       },
-    })
+    });
 
-    if (value === 'defeat') {
-      if (userInfo === 'Student') {
-        logOutUser()
-      } else if (userInfo === 'Teacher') {
-        logOutfTeacher()
-      } else if (userInfo === 'Parent') {
-        logOutParent()
-      } else if (userInfo === 'Publisher') {
-        logOutPublisher()
+    if (value === "defeat") {
+      if (userInfo === "Student") {
+        logOutUser();
+      } else if (userInfo === "Teacher") {
+        logOutfTeacher();
+      } else if (userInfo === "Parent") {
+        logOutParent();
+      } else if (userInfo === "Publisher") {
+        logOutPublisher();
       }
-      removeAuthInfo()
-      setLogout()
-      navigate('/auth/signin')
+      removeAuthInfo();
+      setLogout();
+      router.push("/auth/signin");
     }
-  }
+  };
 
-  const profilePicLocal = localStorage.getItem('profilePic')
+  const profilePicLocal =
+    typeof window !== "undefined" ? localStorage.getItem("profilePic") : null;
 
   const setMainMenuValue = (mainMenuSlug) => {
-    setSelectedMenu('')
-    setSelectedSubMenu('')
-    setSelectedProfileMenu('')
-    setSelectedMenu(mainMenuSlug)
-  }
+    setSelectedMenu("");
+    setSelectedSubMenu("");
+    setSelectedProfileMenu("");
+    setSelectedMenu(mainMenuSlug);
+  };
 
   const setBothMenuValue = (mainMenuSlug, subMenuSlug) => {
-    setSelectedMenu('')
-    setSelectedSubMenu('')
-    setSelectedProfileMenu('')
-    setSelectedMenu(mainMenuSlug)
-    setSelectedSubMenu(subMenuSlug)
-  }
+    setSelectedMenu("");
+    setSelectedSubMenu("");
+    setSelectedProfileMenu("");
+    setSelectedMenu(mainMenuSlug);
+    setSelectedSubMenu(subMenuSlug);
+  };
 
   const profileMenu = [
     {
-      text: 'Edit Profile',
-      link: '/profile',
-      profileMenuSlug: 'profile',
+      text: "Edit Profile",
+      link: "/profile",
+      profileMenuSlug: "profile",
     },
     {
-      text: 'Change Password',
-      link: '/auth/change-pass',
-      profileMenuSlug: '/auth/change-pass',
+      text: "Change Password",
+      link: "/auth/change-pass",
+      profileMenuSlug: "/auth/change-pass",
     },
-  ]
+  ];
 
   return (
     <>
@@ -146,15 +150,15 @@ const Header = (props) => {
         <div className="container">
           <div className="header-wrapper">
             <Link
-              to="/"
+              href="/"
               className="logo"
               onClick={() => {
-                setSelectedMenu('')
-                setSelectedSubMenu('')
-                setSelectedProfileMenu('')
+                setSelectedMenu("");
+                setSelectedSubMenu("");
+                setSelectedProfileMenu("");
               }}
             >
-              <img src={logo} alt="" />
+              <Image src={logo} alt="" />
             </Link>
             <div
               className="nav-toggle d-lg-none"
@@ -163,7 +167,7 @@ const Header = (props) => {
               {!menuOpen ? <FaBars /> : <GrClose />}
             </div>
             <ul
-              className={`menu ms-auto ${menuOpen ? 'show-mobile-menu' : ''}`}
+              className={`menu ms-auto ${menuOpen ? "show-mobile-menu" : ""}`}
             >
               {!isLoggedIn
                 ? menu &&
@@ -178,35 +182,35 @@ const Header = (props) => {
                         clicked,
                         icon,
                       },
-                      i,
+                      i
                     ) => (
                       <React.Fragment key={i}>
                         <li
                           style={{
                             ...style,
-                            color: clicked ? 'white' : 'white',
+                            color: clicked ? "white" : "white",
                           }}
                         >
                           <Link
-                            to={link}
+                            href={link}
                             onClick={() => {
-                              setMainMenuValue(mainMenuSlug)
+                              setMainMenuValue(mainMenuSlug);
                             }}
                           >
                             <span
                               className={
                                 selectedMenu === mainMenuSlug ||
                                 pathName.includes(mainMenuSlug)
-                                  ? 'selected-group'
-                                  : ''
+                                  ? "selected-group"
+                                  : ""
                               }
                             >
                               {icon && (
-                                <img
+                                <Image
                                   className="language-img"
                                   src={icon}
                                   alt=""
-                                  style={{ marginRight: '5px', height: '13px' }}
+                                  style={{ marginRight: "5px", height: "13px" }}
                                 />
                               )}
                               {text}
@@ -218,21 +222,21 @@ const Header = (props) => {
                               {sub_menu
                                 .filter((n) => {
                                   if (
-                                    (!userInfo && n.text === 'Group') ||
+                                    (!userInfo && n.text === "Group") ||
                                     (userInfo &&
-                                      userInfo?.userType !== 'Student' &&
-                                      n.text === 'Group')
+                                      userInfo?.userType !== "Student" &&
+                                      n.text === "Group")
                                   ) {
-                                    return false
+                                    return false;
                                   }
                                   if (
                                     userInfo &&
-                                    userInfo?.userType === 'Teacher' &&
-                                    n.text === 'Self Assessment'
+                                    userInfo?.userType === "Teacher" &&
+                                    n.text === "Self Assessment"
                                   ) {
-                                    return false
+                                    return false;
                                   }
-                                  return true
+                                  return true;
                                 })
                                 .map(
                                   ({ text, link, tabName, subMenuSlug }, i) => (
@@ -241,32 +245,32 @@ const Header = (props) => {
                                         <Link
                                           className={
                                             selectedSubMenu === subMenuSlug
-                                              ? 'selected-group'
-                                              : ''
+                                              ? "selected-group"
+                                              : ""
                                           }
-                                          to={link}
+                                          href={link}
                                           state={{ tabName: tabName }}
                                           onClick={() => {
                                             setBothMenuValue(
                                               mainMenuSlug,
-                                              subMenuSlug,
-                                            )
-                                            handleMenuClick()
+                                              subMenuSlug
+                                            );
+                                            handleMenuClick();
                                           }}
                                         >
                                           {text}
                                         </Link>
                                       </li>
                                     </React.Fragment>
-                                  ),
+                                  )
                                 )}
                             </ul>
                           )}
                         </li>
                       </React.Fragment>
-                    ),
+                    )
                   )
-                : isLoggedIn && userInfo?.userType === 'Teacher'
+                : isLoggedIn && userInfo?.userType === "Teacher"
                 ? dashboard_header_menu &&
                   dashboard_header_menu.map(
                     (
@@ -280,34 +284,34 @@ const Header = (props) => {
                         icon,
                         clicked,
                       },
-                      i,
+                      i
                     ) => (
                       <React.Fragment key={i}>
                         <li
                           style={{
                             ...style,
-                            color: clicked ? 'white' : 'white',
+                            color: clicked ? "white" : "white",
                           }}
                         >
                           <Link
-                            to={link}
+                            href={link}
                             onClick={() => {
-                              setMainMenuValue(mainMenuSlug)
+                              setMainMenuValue(mainMenuSlug);
                             }}
                           >
                             <span
                               className={
                                 selectedMenu === mainMenuSlug
-                                  ? 'selected-group'
-                                  : ''
+                                  ? "selected-group"
+                                  : ""
                               }
                             >
                               {icon && (
-                                <img
+                                <Image
                                   className="language-img"
                                   src={icon}
                                   alt=""
-                                  style={{ marginRight: '5px', height: '13px' }}
+                                  style={{ marginRight: "5px", height: "13px" }}
                                 />
                               )}
                               {text}
@@ -322,37 +326,37 @@ const Header = (props) => {
                               {sub_menu
                                 .filter((n) => {
                                   if (
-                                    (!userInfo && n.text === 'Group') ||
+                                    (!userInfo && n.text === "Group") ||
                                     (userInfo &&
-                                      userInfo?.userType !== 'Student' &&
-                                      n.text === 'Group')
+                                      userInfo?.userType !== "Student" &&
+                                      n.text === "Group")
                                   ) {
-                                    return false
+                                    return false;
                                   }
                                   if (
                                     userInfo &&
-                                    userInfo?.userType === 'Teacher' &&
-                                    n.text === 'Self Assessment'
+                                    userInfo?.userType === "Teacher" &&
+                                    n.text === "Self Assessment"
                                   ) {
-                                    return false
+                                    return false;
                                   }
-                                  return true
+                                  return true;
                                 })
                                 .map(({ text, link, subMenuSlug }, i) => (
                                   <li key={i}>
                                     <Link
                                       className={
                                         selectedSubMenu === subMenuSlug
-                                          ? 'selected-group'
-                                          : ''
+                                          ? "selected-group"
+                                          : ""
                                       }
-                                      to={link}
+                                      href={link}
                                       onClick={() => {
                                         setBothMenuValue(
                                           mainMenuSlug,
-                                          subMenuSlug,
-                                        )
-                                        handleMenuClick()
+                                          subMenuSlug
+                                        );
+                                        handleMenuClick();
                                       }}
                                     >
                                       {text}
@@ -365,14 +369,14 @@ const Header = (props) => {
                             <ul className="submenu">
                               {joinUssub_menu.map(({ text, link }, i) => (
                                 <li key={i}>
-                                  <Link to={link}>{text}</Link>
+                                  <Link href={link}>{text}</Link>
                                 </li>
                               ))}
                             </ul>
                           )}
                         </li>
                       </React.Fragment>
-                    ),
+                    )
                   )
                 : dashboard_header_student_menu &&
                   dashboard_header_student_menu.map(
@@ -387,34 +391,34 @@ const Header = (props) => {
                         icon,
                         clicked,
                       },
-                      i,
+                      i
                     ) => (
                       <React.Fragment key={i}>
                         <li
                           style={{
                             ...style,
-                            color: clicked ? 'white' : 'white',
+                            color: clicked ? "white" : "white",
                           }}
                         >
                           <Link
-                            to={link}
+                            href={link}
                             onClick={() => {
-                              setMainMenuValue(mainMenuSlug)
+                              setMainMenuValue(mainMenuSlug);
                             }}
                           >
                             <span
                               className={
                                 selectedMenu === mainMenuSlug
-                                  ? 'selected-group'
-                                  : ''
+                                  ? "selected-group"
+                                  : ""
                               }
                             >
                               {icon && (
-                                <img
+                                <Image
                                   className="language-img"
                                   src={icon}
                                   alt=""
-                                  style={{ marginRight: '5px', height: '13px' }}
+                                  style={{ marginRight: "5px", height: "13px" }}
                                 />
                               )}
                               {text}
@@ -429,37 +433,37 @@ const Header = (props) => {
                               {sub_menu
                                 .filter((n) => {
                                   if (
-                                    (!userInfo && n.text === 'Group') ||
+                                    (!userInfo && n.text === "Group") ||
                                     (userInfo &&
-                                      userInfo?.userType !== 'Student' &&
-                                      n.text === 'Group')
+                                      userInfo?.userType !== "Student" &&
+                                      n.text === "Group")
                                   ) {
-                                    return false
+                                    return false;
                                   }
                                   if (
                                     userInfo &&
-                                    userInfo?.userType === 'Teacher' &&
-                                    n.text === 'Self Assessment'
+                                    userInfo?.userType === "Teacher" &&
+                                    n.text === "Self Assessment"
                                   ) {
-                                    return false
+                                    return false;
                                   }
-                                  return true
+                                  return true;
                                 })
                                 .map(({ text, link, subMenuSlug }, i) => (
                                   <li key={i}>
                                     <Link
                                       className={
                                         selectedSubMenu === subMenuSlug
-                                          ? 'selected-group'
-                                          : ''
+                                          ? "selected-group"
+                                          : ""
                                       }
-                                      to={link}
+                                      href={link}
                                       onClick={() => {
                                         setBothMenuValue(
                                           mainMenuSlug,
-                                          subMenuSlug,
-                                        )
-                                        handleMenuClick()
+                                          subMenuSlug
+                                        );
+                                        handleMenuClick();
                                       }}
                                     >
                                       {text}
@@ -472,34 +476,34 @@ const Header = (props) => {
                             <ul className="submenu">
                               {joinUssub_menu.map(({ text, link }, i) => (
                                 <li key={i}>
-                                  <Link to={link}>{text}</Link>
+                                  <Link href={link}>{text}</Link>
                                 </li>
                               ))}
                             </ul>
                           )}
                         </li>
                       </React.Fragment>
-                    ),
+                    )
                   )}
 
               {isLoggedIn && userInfo && menuOpen && (
                 <li>
                   <div className="p-3 profile-mobile">
-                    <Link to="/profile" className="p-0">
-                      <img
+                    <Link href="/profile" className="p-0">
+                      <Image
                         onClick={() => {
-                          handleLogout()
-                          handleMenuClick()
+                          handleLogout();
+                          handleMenuClick();
                         }}
                         style={{
-                          height: '42px',
-                          width: '42px',
-                          borderRadius: '50%',
+                          height: "42px",
+                          width: "42px",
+                          borderRadius: "50%",
                         }}
                         src={
                           profilePicLocal &&
                           profilePicLocal != null &&
-                          profilePicLocal !== 'null'
+                          profilePicLocal !== "null"
                             ? `${IMAGE_URL}/${profilePicLocal}`
                             : default_icon
                         }
@@ -511,9 +515,9 @@ const Header = (props) => {
                   <ul className="submenu">
                     <li
                       onClick={() => {
-                        setSelectedMenu('')
-                        setSelectedSubMenu('')
-                        handleMenuClick()
+                        setSelectedMenu("");
+                        setSelectedSubMenu("");
+                        handleMenuClick();
                       }}
                     >
                       {profileMenu.map(({ text, link, profileMenuSlug }, i) => {
@@ -522,21 +526,21 @@ const Header = (props) => {
                             className={
                               selectedprofileMenu === profileMenuSlug ||
                               pathName.includes(profileMenuSlug)
-                                ? 'selected-group'
-                                : ''
+                                ? "selected-group"
+                                : ""
                             }
-                            to={link}
+                            href={link}
                             onClick={() => {
-                              setSelectedMenu('')
-                              setSelectedSubMenu('')
-                              setSelectedProfileMenu(profileMenuSlug)
+                              setSelectedMenu("");
+                              setSelectedSubMenu("");
+                              setSelectedProfileMenu(profileMenuSlug);
                             }}
                           >
                             {text}
                           </Link>
-                        )
+                        );
                       })}
-                      <Link to={'#'} onClick={() => handleLogout()}>
+                      <Link href={"#"} onClick={() => handleLogout()}>
                         Logout
                       </Link>
                     </li>
@@ -547,17 +551,17 @@ const Header = (props) => {
             {isLoggedIn && (
               <ul className="menu ms-2 ms-xl-4">
                 <li>
-                  <Link to="/profile" className="p-0">
-                    <img
+                  <Link href="/profile" className="p-0">
+                    <Image
                       style={{
-                        height: '42px',
-                        width: '42px',
-                        borderRadius: '50%',
+                        height: "42px",
+                        width: "42px",
+                        borderRadius: "50%",
                       }}
                       src={
                         profilePicLocal &&
                         profilePicLocal != null &&
-                        profilePicLocal !== 'null'
+                        profilePicLocal !== "null"
                           ? `${IMAGE_URL}/${profilePicLocal}`
                           : default_icon
                       }
@@ -568,8 +572,8 @@ const Header = (props) => {
                   <ul className="submenu">
                     <li
                       onClick={() => {
-                        setSelectedMenu('')
-                        setSelectedSubMenu('')
+                        setSelectedMenu("");
+                        setSelectedSubMenu("");
                       }}
                     >
                       {profileMenu.map(({ text, link, profileMenuSlug }, i) => {
@@ -578,21 +582,21 @@ const Header = (props) => {
                             className={
                               selectedprofileMenu === profileMenuSlug ||
                               pathName.includes(profileMenuSlug)
-                                ? 'selected-group'
-                                : ''
+                                ? "selected-group"
+                                : ""
                             }
-                            to={link}
+                            href={link}
                             onClick={() => {
-                              setSelectedMenu('')
-                              setSelectedSubMenu('')
-                              setSelectedProfileMenu(profileMenuSlug)
+                              setSelectedMenu("");
+                              setSelectedSubMenu("");
+                              setSelectedProfileMenu(profileMenuSlug);
                             }}
                           >
                             {text}
                           </Link>
-                        )
+                        );
                       })}
-                      <Link to={'#'} onClick={() => handleLogout()}>
+                      <Link href={"#"} onClick={() => handleLogout()}>
                         Logout
                       </Link>
                     </li>
@@ -600,12 +604,12 @@ const Header = (props) => {
                 </li>
               </ul>
             )}
-            {!isLoggedIn ? <LanguageTranslator /> : ''}
+            {!isLoggedIn ? <LanguageTranslator /> : ""}
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

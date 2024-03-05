@@ -1,0 +1,98 @@
+.module {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.module > .iCol[class*='col-'] {
+  display: flex;
+}
+
+.card-block {
+  margin-top: 10px;
+  padding: 30px 15px;
+}
+
+.tCard {
+  width: 100%;
+  background-color: #beb07d;
+  color: black;
+  font-weight: bold;
+  border-radius: 1rem;
+}
+
+.tCard imG {
+  position: absolute;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.blackline_div {
+  margin-top: 55%;
+  height: 2vh;
+  background-color: black;
+}
+
+.icon_imG {
+  position: relative;
+  /* margin-top: 45%;
+  margin-left: 75%;
+  height: 18%;
+  width: 18%; */
+  margin-top: 45%;
+  margin-left: 75%;
+  height: 18%;
+  width: 18%;
+}
+
+.icon_imG2 {
+  position: relative;
+  /* margin-top: 45%;
+  margin-left: 75%;
+  height: 18%;
+  width: 18%; */
+  margin-top: 45%;
+  margin-left: 75%;
+  height: 18%;
+  width: 18%;
+}
+
+.icon_imGR {
+  border-top-left-radius: 0rem !important;
+  border-top-right-radius: 0rem !important;
+  position: relative;
+  /* margin-top: -1%;
+  margin-left: 7%;
+  height: 17%;
+  width: 11%; */
+  margin-top: -1%;
+  margin-left: 7%;
+  height: 17%;
+  width: 11%;
+}
+
+.new {
+  position: absolute;
+  color: white;
+  margin-top: 3%;
+  z-index: 3;
+  margin-left: 7%;
+  height: 10%;
+  width: 15%;
+  font-size: 12px;
+}
+
+.inner_div {
+  font-size: 11px;
+  margin-top: -10%;
+}
+
+.cParagraph {
+  font-size: 12px;
+  margin-top: 8%;
+  width: 100%;
+}
+
+.alarm {
+  height: 15px;
+  width: 15px;
+}
