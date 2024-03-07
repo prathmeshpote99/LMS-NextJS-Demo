@@ -14,7 +14,6 @@ import moment from "moment";
 import { useEffect, useRef, useState } from "react";
 import { BiMessageRounded } from "react-icons/bi";
 import { SlHeart } from "react-icons/sl";
-import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { Input, Modal, ModalBody, ModalHeader } from "reactstrap";
 import swal from "sweetalert";
@@ -336,13 +335,14 @@ const Blog = (args) => {
                         <Image
                           className="profile-img-blog"
                           src={
-                            profilePicLocal
+                            typeof profilePicLocal === "string"
                               ? `${IMAGE_URL}/${profilePicLocal}`
                               : default_icon
                           }
                           alt=""
-                          height={42}
+                          height={38}
                           width={42}
+                          // fill
                         />
                       </div>
                       <div className="col-md-10 user-name">
@@ -408,7 +408,10 @@ const Blog = (args) => {
                       }}
                       // onClick={() => setShowEmojiPicker((prev) => !prev)}
                     >
-                      <Image src={`${icon_img}`} alt="" />
+                      <Image
+                        src={typeof icon_img === "string" ? icon_img : ""}
+                        alt=""
+                      />
                     </span>
                     {errors.bl_image && touched.bl_image ? (
                       <div className="form-err-msg">{errors.bl_image}</div>
@@ -561,7 +564,7 @@ const Blog = (args) => {
                                           : default_icon
                                       }
                                       alt=""
-                                      srcset=""
+                                      // srcset=""
                                       height={42}
                                       width={42}
                                     />
