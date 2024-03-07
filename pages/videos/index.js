@@ -19,6 +19,7 @@ import swal from "sweetalert";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Footer from "@/components/Footer";
 
 function Videos() {
   const isLoggedIn = getAuthToken() ? true : false;
@@ -313,6 +314,7 @@ function Videos() {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

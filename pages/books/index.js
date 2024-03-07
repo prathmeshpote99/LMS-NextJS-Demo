@@ -29,6 +29,7 @@ import { IMAGE_URL } from "@/helpers/urlHelper";
 import BooksSingle from "./BooksSingle";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Footer from "@/components/Footer";
 
 const SignupSchema = Yup.object().shape({
   mainCategory: Yup.string().optional(),
@@ -947,6 +948,7 @@ const Books = () => {
           </div>
         </section>
       )}
+      <Footer />
     </>
   );
 };

@@ -3,6 +3,7 @@ import { getUserInfo } from "@/helpers/authHelper";
 import { useEffect, useState } from "react";
 import EventCard from "@/components/EventCard";
 import { getTrainingPrograms } from "@/helpers/backendHelpers/tariningProgram";
+import Footer from "@/components/Footer";
 
 const TrainingProgram = () => {
   const [trainingPrograms, setTrainingPrograms] = useState([]);
@@ -71,6 +72,7 @@ const TrainingProgram = () => {
           </>
         )}
       </div>
+      <Footer />
     </>
   );
 };

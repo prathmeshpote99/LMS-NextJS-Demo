@@ -25,6 +25,7 @@ import grinning from "@/assets/images/icons/grinning.png";
 import BlogModal from "../BlogModal";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Footer from "@/components/Footer";
 
 const Blog = (args) => {
   const isLoggedIn = getAuthToken() ? true : false;
@@ -686,6 +687,7 @@ const Blog = (args) => {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 };
