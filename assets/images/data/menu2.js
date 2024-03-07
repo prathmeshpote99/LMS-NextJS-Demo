@@ -1,5 +1,5 @@
-import { getAuthToken, getUserInfo } from '../../../helpers/authHelper'
-import offline from '../../../assets/images/icons/offline_icon.png'
+import { getUserInfo } from '@/helpers/authHelper'
+import offline from '@/assets/images/icons/offline_icon.png'
 const userInfo = getUserInfo()
 const dashboard_header_menu = [
   {
@@ -9,7 +9,8 @@ const dashboard_header_menu = [
     sub_menu: [
       {
         text: 'E-books',
-        link: '/library',
+        // link: '/library',
+        link: '/books',
         subMenuSlug: 'library',
       },
       {
@@ -46,19 +47,6 @@ const dashboard_header_menu = [
     link: '/connect/blog',
     // subMenuSlug: 'blog',
     mainMenuSlug: 'connect',
-    // sub_menu: [
-    //   {
-    //     text: 'Blog',
-    //     link: '/connect/blog',
-    //     subMenuSlug: 'blog',
-    //   },
-
-    //   {
-    //     text: 'Group',
-    //     link: '/connect/group',
-    //     subMenuSlug: 'group',
-    //   },
-    // ],
   },
   {
     text: 'Tuition',
@@ -98,30 +86,6 @@ const dashboard_header_menu = [
       marginLeft: '6px',
     },
   },
-  //   {
-  //     text: 'Live Class',
-  //     link: '/live-class',
-  //     mainMenuSlug: 'live-class',
-  //   },
-
-  // {
-  //   text: 'What is KATON',
-  //   link: '#',
-  //   sub_menu: [
-  //     {
-  //       text: 'About us',
-  //       link: '/about',
-  //     },
-  //     {
-  //       text: 'Who Can Join Us',
-  //       link: '/who-can-join',
-  //     },
-  //     {
-  //       text: '360-degree Learning',
-  //       link: '/360-degree-learning',
-  //     },
-  //   ],
-  // },
 ]
 
 export default dashboard_header_menu
@@ -134,7 +98,8 @@ export const dashboard_header_student_menu = [
     sub_menu: [
       {
         text: 'E-books',
-        link: '/library',
+        // link: '/library',
+        link: '/books',
         subMenuSlug: 'library',
       },
       {
@@ -171,19 +136,6 @@ export const dashboard_header_student_menu = [
     link: '/connect/blog',
     // subMenuSlug: 'blog',
     mainMenuSlug: 'connect',
-    // sub_menu: [
-    //   {
-    //     text: 'Blog',
-    //     link: '/connect/blog',
-    //     subMenuSlug: 'blog',
-    //   },
-
-    //   {
-    //     text: 'Group',
-    //     link: '/connect/group',
-    //     subMenuSlug: 'group',
-    //   },
-    // ],
   },
   {
     text: 'Tuition',
@@ -197,48 +149,5 @@ export const dashboard_header_student_menu = [
     },
     clicked: true,
     mainMenuSlug: 'auth/tution',
-    // sub_menu: [
-    //   {
-    //     text: 'Public Teacher',
-    //     link: '/auth/tpublicteacher',
-    //     tabName: 'Teacher',
-    //     subMenuSlug: 'signInTeacher',
-    //   },
-    //   {
-    //     text: 'Learner',
-    //     link: '/auth/tlearner',
-    //     tabName: 'Student',
-    //     subMenuSlug: 'signInStudent',
-    //   },
-    // ],
   },
-  //   {
-  //     text: 'Training',
-  //     link: '/training-program',
-  //     mainMenuSlug: 'training-program',
-  //   },
-  //   {
-  //     text: 'Live Class',
-  //     link: '/live-class',
-  //     mainMenuSlug: 'live-class',
-  //   },
-
-  // {
-  //   text: 'What is KATON',
-  //   link: '#',
-  //   sub_menu: [
-  //     {
-  //       text: 'About us',
-  //       link: '/about',
-  //     },
-  //     {
-  //       text: 'Who Can Join Us',
-  //       link: '/who-can-join',
-  //     },
-  //     {
-  //       text: '360-degree Learning',
-  //       link: '/360-degree-learning',
-  //     },
-  //   ],
-  // },
 ]

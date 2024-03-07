@@ -1,7 +1,7 @@
 import { getApiConfig, getAuthToken } from '../authHelper'
 import { get, post, del } from '../apiHelper'
 import * as url from '../urlHelper'
-import { getConfig } from '@testing-library/dom'
+// import { getConfig } from '@testing-library/dom'
 
 export const getBooks = (userType = '', page = 1, limit = 40, level) => {
   const isLoggedIn = getAuthToken() ? true : false

@@ -1,0 +1,162 @@
+.training-programe-details .top-img img {
+  width: 100%;
+  max-height: 465px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.training-programe-details .top-img .event-meta {
+  font-size: 14px;
+  margin-top: 25px;
+}
+.training-programe-details .top-img .event-meta svg {
+  font-size: 17px;
+  color: var(--base);
+  margin-right: 5px;
+}
+.training-programe-details .top-img .event-meta span {
+  display: flex;
+  align-items: center;
+}
+.training-programe-details .top-img .event-meta span:not(:last-child) {
+  margin-right: 20px;
+}
+.training-programe-details .title {
+  margin: 0;
+  margin-bottom: 18px;
+}
+
+.visual-list {
+  font-size: 30px;
+  color: var(--base);
+}
+.visual-list h6 {
+  margin: 0;
+  margin-bottom: 5px;
+}
+.visual-list div {
+  color: var(--text);
+  font-size: 14px;
+}
+.visual-list li:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.tags-area {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.tags-area .tags,
+.tags-area .share {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.tags-area .tags h6,
+.tags-area .share h6 {
+  margin: 0;
+  margin-right: 10px;
+}
+.tags-area .tags ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.tags-area .tags ul li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.tags-area .tags ul li:not(:last-child) {
+  margin-right: 10px;
+}
+.tags-area .tags ul li:not(:last-child)::after {
+  content: ",";
+}
+
+.comments-list-items {
+  padding: 0;
+  margin: 0;
+  margin-top: 30px;
+}
+.comments-list-items li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.comments-list-items li:not(:last-child) {
+  padding-bottom: 30px;
+  border-bottom: 1px solid #f4f4f4;
+}
+.comments-list-items li:not(:first-child) {
+  padding-top: 30px;
+}
+.comments-list-items li img {
+  width: 80px;
+  aspect-ratio: 1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+.comments-list-items li .cont {
+  width: calc(100% - 80px);
+  padding-left: 20px;
+}
+.comments-list-items li .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+.comments-list-items li .top .cmn--btn {
+  padding: 8px 15px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.comments-list-items li .top .name {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.comments-list-items li .top .date {
+  font-size: 14px;
+  margin-bottom: 10px;
+  display: block;
+}
+@media (max-width: 425px) {
+  .comments-list-items li {
+    font-size: 14px;
+  }
+  .comments-list-items li img {
+    width: 30px;
+  }
+  .comments-list-items li .cont {
+    padding-left: 10px;
+    width: calc(100% - 30px);
+  }
+  .comments-list-items li .cont .name {
+    font-size: 15px;
+  }
+  .comments-list-items li .cont .date {
+    font-size: 12px;
+  }
+  .comments-list-items li .cont .cmn--btn {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 576px) {
+  .comment-title {
+    font-size: 26px;
+    font-weight: 600;
+  }
+}
+
+textarea.form-control {
+  height: 130px;
+}/*# sourceMappingURL=TrainingPrograme.css.map */

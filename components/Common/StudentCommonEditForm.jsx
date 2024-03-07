@@ -1,35 +1,36 @@
-import { Field, Form, Formik } from 'formik'
-import RegionDistrictCircuitDropDownAllSelectable from 'helpers/RegionDistrictCircuitDropDownAllSelectable'
-import { getUserInfo } from 'helpers/authHelper'
-import { getCategories } from 'helpers/backendHelpers/book'
+import { Field, Form, Formik } from "formik";
+import RegionDistrictCircuitDropDownAllSelectable from "@/helpers/RegionDistrictCircuitDropDownAllSelectable";
+import { getUserInfo } from "@/helpers/authHelper";
+import { getCategories } from "@/helpers/backendHelpers/book";
 import {
   getAllSchoolByArea,
   getProfile,
   updateProfilePicture,
-} from 'helpers/backendHelpers/student'
+} from "@/helpers/backendHelpers/student";
 import {
   getTeacherProfile,
   updateProfilePictureTeacher,
-} from 'helpers/backendHelpers/teacher'
-import { defaultRDCSeparator } from 'helpers/common'
+} from "@/helpers/backendHelpers/teacher";
+import { defaultRDCSeparator } from "@/helpers/common";
 import {
   certificateList,
   divisions,
   languages,
   levels,
   yearsOfExperience,
-} from 'helpers/dropdownVals'
-import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
-import { FaCamera, FaEnvelope, FaPhone } from 'react-icons/fa'
-import { GrClose } from 'react-icons/gr'
-import ImageUploading from 'react-images-uploading'
-import Select from 'react-select'
-import { ToastContainer, toast } from 'react-toastify'
-import default_icon from '../../assets/images/default_avatar.png'
-import { IMAGE_URL } from '../../helpers/urlHelper'
-import ButtonLoader from './ButtonLoader'
-import SubmitLoader from './SubmitLoader'
+} from "@/helpers/dropdownVals";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { FaCamera, FaEnvelope, FaPhone } from "react-icons/fa";
+import { GrClose } from "react-icons/gr";
+import ImageUploading from "react-images-uploading";
+import Select from "react-select";
+import { ToastContainer, toast } from "react-toastify";
+import default_icon from "@/assets/images/default_avatar.png";
+import { IMAGE_URL } from "@/helpers/urlHelper";
+import ButtonLoader from "./ButtonLoader";
+import SubmitLoader from "./SubmitLoader";
+import Image from "next/image";
 
 const StudentCommonEditForm = (props) => {
   const {
@@ -53,376 +54,388 @@ const StudentCommonEditForm = (props) => {
     isSubmitButtonLoading,
     setIsSubmitButtonLoading,
     handleFormValueChange,
-  } = props
+  } = props;
 
-  const [images, setImages] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [selectedClass, setSelectedClass] = useState('')
-  const [selectedDivsion, setSelectedDivsion] = useState('')
-  const [schoolDropdownValues, setSchoolDropdownValues] = useState([])
-  const [selectedSchool, setSelectedSchool] = useState(null)
-  const [selectedBloodGroup, setselectedBloodGroup] = useState('')
-  const [selectedExperience, setSelectedExperience] = useState('')
-  const [selectedCertificate, setSelectedCertificate] = useState('')
-  const [selectedLevel, setselectedLevel] = useState(null)
-  const [categoryList, setCategoryList] = useState(null)
-  const userInfo = getUserInfo()
+  const [images, setImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedClass, setSelectedClass] = useState("");
+  const [selectedDivsion, setSelectedDivsion] = useState("");
+  const [schoolDropdownValues, setSchoolDropdownValues] = useState([]);
+  const [selectedSchool, setSelectedSchool] = useState(null);
+  const [selectedBloodGroup, setselectedBloodGroup] = useState("");
+  const [selectedExperience, setSelectedExperience] = useState("");
+  const [selectedCertificate, setSelectedCertificate] = useState("");
+  const [selectedLevel, setselectedLevel] = useState(null);
+  const [categoryList, setCategoryList] = useState(null);
+  const userInfo = getUserInfo();
 
-  const maxNumber = 1
+  const maxNumber = 1;
 
   useEffect(() => {
-    getAllCategories()
-    if (userInfo.userType === 'Student' || userInfo.userType === 'Premium') {
-      fetchStudentForEdit()
+    getAllCategories();
+    if (userInfo?.userType === "Student" || userInfo?.userType === "Premium") {
+      fetchStudentForEdit();
     } else if (
-      userInfo.userType === 'Teacher' ||
-      userInfo.userType === 'Freelance'
+      userInfo?.userType === "Teacher" ||
+      userInfo?.userType === "Freelance"
     ) {
-      fetchTeacherForEdit()
+      fetchTeacherForEdit();
     }
-  }, [])
+  }, []);
 
   const onChange = async (imageList, addUpdateIndex) => {
     try {
-      setIsSubmitLoading(true)
-      setIsSubmitButtonLoading(true)
-      let studentData = studentForm.st_profilePic
-      studentData.st_profilePic = imageList[0]?.file
-      const response = await updateProfilePicture(studentData)
-      fetchStudentForEdit()
-      typeof window !== "undefined" ? localStorage.setItem(
-        'profilePic',
-        response.data.student[1][0].st_profilePic,
-      ) : null
-      window.dispatchEvent(new Event('storage'))
-      let message = 'Profile pic uploaded successfully'
-      setImages(imageList)
-      setIsSubmitLoading(true)
-      setIsSubmitButtonLoading(false)
+      setIsSubmitLoading(true);
+      setIsSubmitButtonLoading(true);
+      let studentData = studentForm.st_profilePic;
+      studentData.st_profilePic = imageList[0]?.file;
+      const response = await updateProfilePicture(studentData);
+      fetchStudentForEdit();
+      typeof window !== "undefined"
+        ? localStorage.setItem(
+            "profilePic",
+            response.data.student[1][0].st_profilePic
+          )
+        : null;
+      window.dispatchEvent(new Event("storage"));
+      let message = "Profile pic uploaded successfully";
+      setImages(imageList);
+      setIsSubmitLoading(true);
+      setIsSubmitButtonLoading(false);
       toast.success(message, {
         autoClose: 5000,
-      })
+      });
     } catch (error) {
       let message =
         error?.response?.data?.message ||
         error?.message ||
-        'There was a problem updating profile picture'
-      setIsSubmitLoading(true)
-      setIsSubmitButtonLoading(false)
+        "There was a problem updating profile picture";
+      setIsSubmitLoading(true);
+      setIsSubmitButtonLoading(false);
       toast.error(message, {
         autoClose: 5000,
-      })
+      });
     }
-  }
+  };
 
   const fetchStudentForEdit = async () => {
     try {
-      setIsLoading(true)
-      let response = await getProfile()
-      let { studentProfile } = response.data || {}
-      let { st_region, st_district, st_circuit } = studentProfile
-      let studentData = {}
-      let areaValue = ''
+      setIsLoading(true);
+      let response = await getProfile();
+      let { studentProfile } = response.data || {};
+      let { st_region, st_district, st_circuit } = studentProfile;
+      let studentData = {};
+      let areaValue = "";
       if (st_region || st_district || st_circuit) {
-        areaValue = `${st_region || ''}${defaultRDCSeparator}${
-          st_district || ''
-        }${defaultRDCSeparator}${st_circuit || ''}`
+        areaValue = `${st_region || ""}${defaultRDCSeparator}${
+          st_district || ""
+        }${defaultRDCSeparator}${st_circuit || ""}`;
 
-        studentProfile['areaValue'] = areaValue
-        studentData['areaValue'] = areaValue
+        studentProfile["areaValue"] = areaValue;
+        studentData["areaValue"] = areaValue;
       } else {
-        studentProfile['areaValue'] = ''
-        studentData['areaValue'] = ''
+        studentProfile["areaValue"] = "";
+        studentData["areaValue"] = "";
       }
-      studentProfile['st_profilePic_old'] = studentProfile['st_profilePic']
-      studentProfile['st_profilePic'] = { fileName: '', file: {} }
-      studentProfile['st_parentName'] = studentProfile['st_parentName']
-        ? studentProfile['st_parentName']
-        : ''
-      studentProfile['st_class'] = studentProfile['st_class']
-        ? studentProfile['st_class']
-        : ''
-      studentProfile['st_division'] = studentProfile['st_division']
-      studentProfile['st_division'] = studentProfile['st_division']
-        ? studentProfile['st_division']
-        : ''
-      studentProfile['st_phoneNumber'] = studentProfile['st_phoneNumber']
-        ? studentProfile['st_phoneNumber']
-        : ''
+      studentProfile["st_profilePic_old"] = studentProfile["st_profilePic"];
+      studentProfile["st_profilePic"] = { fileName: "", file: {} };
+      studentProfile["st_parentName"] = studentProfile["st_parentName"]
+        ? studentProfile["st_parentName"]
+        : "";
+      studentProfile["st_class"] = studentProfile["st_class"]
+        ? studentProfile["st_class"]
+        : "";
+      studentProfile["st_division"] = studentProfile["st_division"];
+      studentProfile["st_division"] = studentProfile["st_division"]
+        ? studentProfile["st_division"]
+        : "";
+      studentProfile["st_phoneNumber"] = studentProfile["st_phoneNumber"]
+        ? studentProfile["st_phoneNumber"]
+        : "";
 
-      studentData['st_fullName'] = studentProfile['st_fullName']
-      studentData['st_email'] = studentProfile['st_email']
-      studentData['st_altEmail'] = studentProfile['st_altEmail']
-      studentData['st_studentId'] = studentProfile['st_studentId']
-      studentData['st_countryCode'] = studentProfile['st_countryCode']
-      studentData['st_parentCountryCode'] =
-        studentProfile['st_parentCountryCode']
+      studentData["st_fullName"] = studentProfile["st_fullName"];
+      studentData["st_email"] = studentProfile["st_email"];
+      studentData["st_altEmail"] = studentProfile["st_altEmail"];
+      studentData["st_studentId"] = studentProfile["st_studentId"];
+      studentData["st_countryCode"] = studentProfile["st_countryCode"];
+      studentData["st_parentCountryCode"] =
+        studentProfile["st_parentCountryCode"];
 
-      studentData['st_phoneNumber'] = studentProfile['st_phoneNumber']
-      studentData['st_level'] = studentProfile['st_level'] || ''
-      studentData['st_class'] = studentProfile['st_class']
-      studentData['st_division'] = studentProfile['st_division']
-      studentData['st_profilePic_old'] = studentProfile['st_profilePic_old']
-      studentData['st_profilePic'] = { fileName: '', file: {} }
-      studentData['st_parentName'] = studentProfile['st_parentName']
-        ? studentProfile['st_parentName']
-        : ''
-        ? studentProfile['st_parentName']
-        : ''
-      studentData['st_class'] = studentProfile['st_class']
-        ? studentProfile['st_class']
-        : ''
-      studentData['st_division'] = studentProfile['st_division']
-        ? studentProfile['st_division']
-        : ''
-      studentData['st_phoneNumber'] = studentProfile['st_phoneNumber']
-        ? studentProfile['st_phoneNumber']
-        : ''
-      studentData['st_parentPhoneNumber'] = studentProfile[
-        'st_parentPhoneNumber'
+      studentData["st_phoneNumber"] = studentProfile["st_phoneNumber"];
+      studentData["st_level"] = studentProfile["st_level"] || "";
+      studentData["st_class"] = studentProfile["st_class"];
+      studentData["st_division"] = studentProfile["st_division"];
+      studentData["st_profilePic_old"] = studentProfile["st_profilePic_old"];
+      studentData["st_profilePic"] = { fileName: "", file: {} };
+      studentData["st_parentName"] = studentProfile["st_parentName"]
+        ? studentProfile["st_parentName"]
+        : ""
+        ? studentProfile["st_parentName"]
+        : "";
+      studentData["st_class"] = studentProfile["st_class"]
+        ? studentProfile["st_class"]
+        : "";
+      studentData["st_division"] = studentProfile["st_division"]
+        ? studentProfile["st_division"]
+        : "";
+      studentData["st_phoneNumber"] = studentProfile["st_phoneNumber"]
+        ? studentProfile["st_phoneNumber"]
+        : "";
+      studentData["st_parentPhoneNumber"] = studentProfile[
+        "st_parentPhoneNumber"
       ]
-        ? studentProfile['st_parentPhoneNumber']
-        : ''
-      studentData['st_parentEmail'] = studentProfile['st_parentEmail']
-        ? studentProfile['st_parentEmail']
-        : ''
+        ? studentProfile["st_parentPhoneNumber"]
+        : "";
+      studentData["st_parentEmail"] = studentProfile["st_parentEmail"]
+        ? studentProfile["st_parentEmail"]
+        : "";
 
-      fetchAllSchoolByArea(areaValue, studentProfile['st_schoolId'])
+      fetchAllSchoolByArea(areaValue, studentProfile["st_schoolId"]);
 
       if (studentProfile.st_division) {
         setSelectedDivsion({
           label: studentProfile.st_division,
           value: studentProfile.st_division,
-        })
+        });
       }
       if (studentProfile.st_class) {
         setSelectedClass({
           label: studentProfile.st_class,
           value: studentProfile.st_class,
-        })
+        });
       }
       if (studentProfile.st_level) {
         setselectedLevel({
           label: studentProfile.st_level,
           value: studentProfile.st_level,
-        })
+        });
       }
       setSelectedSchool({
-        label: '',
-        value: '',
-      })
-      setStudentForm(studentProfile)
-      setIsLoading(false)
+        label: "",
+        value: "",
+      });
+      setStudentForm(studentProfile);
+      setIsLoading(false);
     } catch (error) {
       let message =
         error?.response?.data?.message ||
         error?.message ||
-        'Error while fetching profile details'
+        "Error while fetching profile details";
 
-      console.log(message)
-      setIsLoading(false)
+      console.log(message);
+      setIsLoading(false);
     }
-  }
+  };
 
   const fetchAllSchoolByArea = async (values, oldVal) => {
-    if (values === '') {
-      setSchoolDropdownValues([])
-      if (userInfo.userType === 'Student' || userInfo.userType === 'Premium') {
-        setStudentForm({ ...studentForm, st_schoolId: '' })
+    if (values === "") {
+      setSchoolDropdownValues([]);
+      if (userInfo.userType === "Student" || userInfo.userType === "Premium") {
+        setStudentForm({ ...studentForm, st_schoolId: "" });
       } else if (
-        userInfo.userType === 'Teacher' ||
-        userInfo.userType === 'Freelance'
+        userInfo.userType === "Teacher" ||
+        userInfo.userType === "Freelance"
       ) {
-        setTeacherForm({ ...teacherForm, tc_schoolId: '' })
+        setTeacherForm({ ...teacherForm, tc_schoolId: "" });
       }
     } else {
       try {
         let [region, district, circuit] =
-          (values + '' || '')?.split(defaultRDCSeparator) || []
-        region = region || ''
-        district = district || ''
-        circuit = circuit || ''
+          (values + "" || "")?.split(defaultRDCSeparator) || [];
+        region = region || "";
+        district = district || "";
+        circuit = circuit || "";
 
-        const response = await getAllSchoolByArea(region, district, circuit)
-        let { schools } = response.data || {}
+        const response = await getAllSchoolByArea(region, district, circuit);
+        let { schools } = response.data || {};
 
         let dropdownVals = schools.map((school) => {
-          return { value: school.sc_id, label: school.sc_schoolName }
-        })
+          return { value: school.sc_id, label: school.sc_schoolName };
+        });
 
-        dropdownVals = dropdownVals || []
-        setSchoolDropdownValues(dropdownVals)
+        dropdownVals = dropdownVals || [];
+        setSchoolDropdownValues(dropdownVals);
         if (oldVal) {
-          const defVal = dropdownVals.find((item) => item.value === oldVal)
-          defVal && setSelectedSchool(defVal)
+          const defVal = dropdownVals.find((item) => item.value === oldVal);
+          defVal && setSelectedSchool(defVal);
         }
       } catch (error) {
         let message =
           error?.response?.data?.message ||
           error?.message ||
-          'There Was A Problem Fetching Schools'
-        console.log(message)
-        setSchoolDropdownValues([])
+          "There Was A Problem Fetching Schools";
+        console.log(message);
+        setSchoolDropdownValues([]);
       }
     }
-  }
+  };
 
   const onChangeTeacher = async (imageList, addUpdateIndex) => {
     try {
-      setIsSubmitLoading(true)
-      setIsSubmitButtonLoading(true)
-      let teacherData = teacherForm.tc_profilePic
-      teacherData.tc_profilePic = imageList[0]?.file
-      const response = await updateProfilePictureTeacher(teacherData)
-      fetchTeacherForEdit()
-      typeof window !== "undefined" ? localStorage.setItem('profilePic', response.data.teacher.tc_profilePic) : null
-      window.dispatchEvent(new Event('storage'))
-      let message = 'Profile pic uploaded successfully'
-      setImages(imageList)
-      setIsSubmitLoading(true)
-      setIsSubmitButtonLoading(false)
+      setIsSubmitLoading(true);
+      setIsSubmitButtonLoading(true);
+      let teacherData = teacherForm.tc_profilePic;
+      teacherData.tc_profilePic = imageList[0]?.file;
+      const response = await updateProfilePictureTeacher(teacherData);
+      fetchTeacherForEdit();
+      typeof window !== "undefined"
+        ? localStorage.setItem(
+            "profilePic",
+            response.data.teacher.tc_profilePic
+          )
+        : null;
+      window.dispatchEvent(new Event("storage"));
+      let message = "Profile pic uploaded successfully";
+      setImages(imageList);
+      setIsSubmitLoading(true);
+      setIsSubmitButtonLoading(false);
       toast.success(message, {
         autoClose: 5000,
-      })
+      });
     } catch (error) {
       let message =
         error?.response?.data?.message ||
         error?.message ||
-        'There was a problem updating profile picture'
-      setIsSubmitLoading(false)
-      setIsSubmitButtonLoading(false)
+        "There was a problem updating profile picture";
+      setIsSubmitLoading(false);
+      setIsSubmitButtonLoading(false);
       toast.error(message, {
         autoClose: 5000,
-      })
+      });
     }
-  }
+  };
 
   const fetchTeacherForEdit = async () => {
     try {
-      setIsLoading(true)
-      let response = await getTeacherProfile()
-      let { teacherProfile } = response.data || {}
+      setIsLoading(true);
+      let response = await getTeacherProfile();
+      let { teacherProfile } = response.data || {};
 
-      let teacherData = {}
+      let teacherData = {};
 
-      teacherProfile['tc_profilePic_old'] = teacherProfile['tc_profilePic']
-      teacherProfile['tc_profilePic'] = { fileName: '', file: {} }
-      typeof window !== "undefined" ? localStorage.setItem('profilePic', teacherProfile['tc_profilePic_old']) : null
+      teacherProfile["tc_profilePic_old"] = teacherProfile["tc_profilePic"];
+      teacherProfile["tc_profilePic"] = { fileName: "", file: {} };
+      typeof window !== "undefined"
+        ? localStorage.setItem(
+            "profilePic",
+            teacherProfile["tc_profilePic_old"]
+          )
+        : null;
 
-      let { tc_region, tc_district, tc_circuit } = teacherProfile
-      let areaValue = ''
+      let { tc_region, tc_district, tc_circuit } = teacherProfile;
+      let areaValue = "";
       if (tc_region || tc_district || tc_circuit) {
-        areaValue = `${tc_region || ''}${defaultRDCSeparator}${
-          tc_district || ''
-        }${defaultRDCSeparator}${tc_circuit || ''}`
-        teacherProfile['areaValue'] = areaValue
-        teacherData['areaValue'] = areaValue
+        areaValue = `${tc_region || ""}${defaultRDCSeparator}${
+          tc_district || ""
+        }${defaultRDCSeparator}${tc_circuit || ""}`;
+        teacherProfile["areaValue"] = areaValue;
+        teacherData["areaValue"] = areaValue;
       } else {
-        teacherProfile['areaValue'] = ''
-        teacherData['areaValue'] = ''
+        teacherProfile["areaValue"] = "";
+        teacherData["areaValue"] = "";
       }
-      teacherData['tc_schoolId'] = teacherProfile['tc_schoolId']
-      fetchAllSchoolByArea(areaValue, teacherData['tc_schoolId'])
+      teacherData["tc_schoolId"] = teacherProfile["tc_schoolId"];
+      fetchAllSchoolByArea(areaValue, teacherData["tc_schoolId"]);
       if (teacherProfile.tc_bloodGroup) {
         setselectedBloodGroup({
           label: teacherProfile.tc_bloodGroup,
           value: teacherProfile.tc_bloodGroup,
-        })
+        });
       }
-      let langFromRes = teacherProfile['tc_languageSpoken']
-      let tempLang = []
+      let langFromRes = teacherProfile["tc_languageSpoken"];
+      let tempLang = [];
       if (langFromRes && langFromRes.length > 0) {
         tempLang = languages?.filter((master) => {
           return langFromRes?.find((subRes) => {
-            return subRes === master.value
-          })
-        })
-        setSelectedLanguages(tempLang)
+            return subRes === master.value;
+          });
+        });
+        setSelectedLanguages(tempLang);
       }
       if (teacherProfile.tc_experience) {
         setSelectedExperience({
           label: teacherProfile.tc_experience,
           value: teacherProfile.tc_experience,
-        })
+        });
       }
       if (teacherProfile.tc_level) {
         setselectedLevel({
           label: teacherProfile.tc_level,
           value: teacherProfile.tc_level,
-        })
+        });
       }
       if (teacherProfile.tc_certificate) {
         setSelectedCertificate({
           label: teacherProfile.tc_certificate,
           value: teacherProfile.tc_certificate,
-        })
+        });
       }
-      teacherData['tc_profilePic_old'] = teacherProfile['tc_profilePic_old']
-      teacherData['tc_fullName'] = teacherProfile['tc_fullName']
-      teacherData['tc_email'] = teacherProfile['tc_email']
-      teacherData['tc_phoneNumber'] = teacherProfile['tc_phoneNumber']
-      teacherData['tc_altEmail'] = teacherProfile['tc_altEmail']
-      teacherData['tc_countryCode'] = teacherProfile['tc_countryCode']
+      teacherData["tc_profilePic_old"] = teacherProfile["tc_profilePic_old"];
+      teacherData["tc_fullName"] = teacherProfile["tc_fullName"];
+      teacherData["tc_email"] = teacherProfile["tc_email"];
+      teacherData["tc_phoneNumber"] = teacherProfile["tc_phoneNumber"];
+      teacherData["tc_altEmail"] = teacherProfile["tc_altEmail"];
+      teacherData["tc_countryCode"] = teacherProfile["tc_countryCode"];
 
-      teacherData['tc_certificate'] = teacherProfile['tc_certificate']
+      teacherData["tc_certificate"] = teacherProfile["tc_certificate"];
 
-      teacherData['tc_experience'] = teacherProfile['tc_experience']
+      teacherData["tc_experience"] = teacherProfile["tc_experience"];
 
-      teacherData['tc_level'] = teacherProfile['tc_level']
-      teacherData['tc_languageSpoken'] = teacherProfile['tc_languageSpoken']
-      teacherData['tc_briefProfile'] = teacherProfile['tc_briefProfile']
-      teacherData['tc_briefProfile'] = teacherProfile['tc_briefProfile']
-      teacherData['tc_profilePic'] = { fileName: '', file: {} }
-      if (userInfo?.userType === 'Teacher') {
-        teacherData['tc_staffId'] = teacherProfile['tc_staffId']
-        teacherData['tc_alsoKnownAs'] = teacherProfile['tc_alsoKnownAs']
+      teacherData["tc_level"] = teacherProfile["tc_level"];
+      teacherData["tc_languageSpoken"] = teacherProfile["tc_languageSpoken"];
+      teacherData["tc_briefProfile"] = teacherProfile["tc_briefProfile"];
+      teacherData["tc_briefProfile"] = teacherProfile["tc_briefProfile"];
+      teacherData["tc_profilePic"] = { fileName: "", file: {} };
+      if (userInfo?.userType === "Teacher") {
+        teacherData["tc_staffId"] = teacherProfile["tc_staffId"];
+        teacherData["tc_alsoKnownAs"] = teacherProfile["tc_alsoKnownAs"];
       }
-      setTeacherForm(teacherData)
-      setIsLoading(false)
+      setTeacherForm(teacherData);
+      setIsLoading(false);
     } catch (error) {
       let message =
         error?.response?.data?.message ||
         error?.message ||
-        'Error while fetching profile details'
-      console.log(message)
-      setIsLoading(false)
+        "Error while fetching profile details";
+      console.log(message);
+      setIsLoading(false);
     }
-  }
+  };
 
-  const getAllCategories = async (filterCategory = '') => {
+  const getAllCategories = async (filterCategory = "") => {
     try {
-      let response = await getCategories()
-      let { categories } = response.data
-      let vals = []
-      let mainCategoryArray = []
+      let response = await getCategories();
+      let { categories } = response.data;
+      let vals = [];
+      let mainCategoryArray = [];
 
       if (filterCategory) {
         let filteredData = categories.filter(
-          (data) => data.categoryId === filterCategory,
-        )
+          (data) => data.categoryId === filterCategory
+        );
         filteredData[0].category.map((data) => {
-          vals.push({ name: data.CategoryName, value: data.CategoryName })
-        })
+          vals.push({ name: data.CategoryName, value: data.CategoryName });
+        });
       } else {
         categories.map((mainCategory) => {
-          let val = []
-          let { category } = mainCategory
+          let val = [];
+          let { category } = mainCategory;
 
           category.map((cat) => {
-            val.push({ label: cat.CategoryName, value: cat.CategoryName })
-          })
+            val.push({ label: cat.CategoryName, value: cat.CategoryName });
+          });
           mainCategoryArray.push({
             label: mainCategory.categoryName,
             options: val,
-          })
-        })
+          });
+        });
       }
 
-      setCategoryList(mainCategoryArray)
+      setCategoryList(mainCategoryArray);
     } catch (error) {
-      console.log('error', error)
+      console.log("error", error);
     }
-  }
+  };
 
   const getLevelFromClass = (givenClass, categoryList) => {
     for (let i = 0; i < categoryList.length; i++) {
@@ -430,36 +443,36 @@ const StudentCommonEditForm = (props) => {
       for (let j = 0; j < categoryList[i].options.length; j++) {
         if (categoryList[i].options[j].value === givenClass) {
           // returning the level in which the class is present
-          return categoryList[i].label
+          return categoryList[i].label;
         }
       }
     }
-    return ''
-  }
+    return "";
+  };
 
   return (
     <>
       <ToastContainer position="top-right" />
       <>
-        {(userInfo?.userType === 'Student' ||
-          userInfo?.userType === 'Premium') && (
+        {(userInfo?.userType === "Student" ||
+          userInfo?.userType === "Premium") && (
           <Formik enableReinitialize={true}>
             <Form
               style={
                 isLoading
                   ? {
-                      position: 'relative',
-                      opacity: '0.8',
-                      minHeight: '600px',
+                      position: "relative",
+                      opacity: "0.8",
+                      minHeight: "600px",
                     }
                   : {}
               }
               className="profile-form my-4 py-2"
               autoComplete="off"
               onSubmit={(e) => {
-                e.preventDefault()
-                formik.handleSubmit(e)
-                return false
+                e.preventDefault();
+                formik.handleSubmit(e);
+                return false;
               }}
             >
               {isLoading ? (
@@ -486,13 +499,15 @@ const StudentCommonEditForm = (props) => {
                         {imageList.length === 0 && (
                           <>
                             <div className="update-image-container">
-                              <img
+                              <Image
                                 src={
                                   studentForm?.st_profilePic_old
                                     ? `${IMAGE_URL}/${studentForm?.st_profilePic_old}`
                                     : default_icon
                                 }
                                 alt={studentForm?.st_fullName}
+                                width={42}
+                                height={42}
                               />
                               <label
                                 className="upload-icon"
@@ -506,7 +521,7 @@ const StudentCommonEditForm = (props) => {
                         <div className="upload__image-wrapper">
                           {imageList.map((image, index) => (
                             <div key={index} className="image-item">
-                              <img src={image['data_url']} alt="" />
+                              <Image src={image["data_url"]} alt="" />
                               <button
                                 onClick={() => onImageRemove(index)}
                                 className="remove-btn"
@@ -526,14 +541,14 @@ const StudentCommonEditForm = (props) => {
                     <Field
                       className={`form-control common-input ${
                         formik.errors.st_fullName && formik.touched.st_fullName
-                          ? 'form-err'
-                          : ''
+                          ? "form-err"
+                          : ""
                       }`}
                       name="st_fullName"
                       type="text"
                       onChange={(e) => {
-                        formik.handleChange(e)
-                        handleFormValueChange(e)
+                        formik.handleChange(e);
+                        handleFormValueChange(e);
                       }}
                       onBlur={formik.handleBlur}
                       placeholder="First Middle Last"
@@ -556,15 +571,15 @@ const StudentCommonEditForm = (props) => {
                     <Field
                       className={`form-control common-input ${
                         formik.errors.st_email && formik.touched.st_email
-                          ? 'form-err'
-                          : ''
+                          ? "form-err"
+                          : ""
                       }`}
                       disabled
                       name="st_email"
                       value={formik.values.st_email}
                       onChange={(e) => {
-                        formik.handleChange(e)
-                        handleFormValueChange(e)
+                        formik.handleChange(e);
+                        handleFormValueChange(e);
                       }}
                       placeholder="Enter Email"
                     />
@@ -584,14 +599,14 @@ const StudentCommonEditForm = (props) => {
                     <Field
                       className={`form-control common-input ${
                         formik.errors.st_altEmail && formik.touched.st_altEmail
-                          ? 'form-err'
-                          : ''
+                          ? "form-err"
+                          : ""
                       }`}
                       name="st_altEmail"
                       value={formik.values.st_altEmail}
                       onChange={(e) => {
-                        formik.handleChange(e)
-                        handleFormValueChange(e)
+                        formik.handleChange(e);
+                        handleFormValueChange(e);
                       }}
                       placeholder="Enter alternative email"
                     />
@@ -612,14 +627,14 @@ const StudentCommonEditForm = (props) => {
                       className={`form-control common-input ${
                         formik.errors.st_studentId &&
                         formik.touched.st_studentId
-                          ? 'form-err'
-                          : ''
+                          ? "form-err"
+                          : ""
                       }`}
                       name="st_studentId"
                       type="text"
                       onChange={(e) => {
-                        formik.handleChange(e)
-                        handleFormValueChange(e)
+                        formik.handleChange(e);
+                        handleFormValueChange(e);
                       }}
                       onBlur={formik.handleBlur}
                       placeholder="Enter student id"
@@ -646,15 +661,15 @@ const StudentCommonEditForm = (props) => {
                         className={`form-control common-input select-country ${
                           formik.errors.st_countryCode &&
                           formik.touched.st_countryCode
-                            ? 'form-err'
-                            : ''
+                            ? "form-err"
+                            : ""
                         } pe-0`}
                         as="select"
                         name="st_countryCode"
                         value={formik.values.st_countryCode}
                         onChange={(e) => {
-                          formik.handleChange(e)
-                          handleFormValueChange(e)
+                          formik.handleChange(e);
+                          handleFormValueChange(e);
                         }}
                         placeholder="Enter Country Code"
                       >
@@ -672,15 +687,15 @@ const StudentCommonEditForm = (props) => {
                           className={`form-control common-input ${
                             formik.errors.st_phoneNumber &&
                             formik.touched.st_phoneNumber
-                              ? 'form-err'
-                              : ''
+                              ? "form-err"
+                              : ""
                           }`}
                           name="st_phoneNumber"
                           value={formik.values.st_phoneNumber}
                           type="number"
                           onChange={(e) => {
-                            formik.handleChange(e)
-                            handleFormValueChange(e)
+                            formik.handleChange(e);
+                            handleFormValueChange(e);
                           }}
                           placeholder="Enter Phone"
                         />
@@ -710,20 +725,20 @@ const StudentCommonEditForm = (props) => {
                           onChange={(value) => {
                             const studentLevel = getLevelFromClass(
                               value.value,
-                              categoryList,
-                            )
-                            setselectedLevel(studentLevel)
-                            handleFormValueChange(value)
-                            setSelectedClass(value)
+                              categoryList
+                            );
+                            setselectedLevel(studentLevel);
+                            handleFormValueChange(value);
+                            setSelectedClass(value);
                             formik.setFieldValue(
-                              'st_class',
-                              value ? value.value : '',
-                            )
+                              "st_class",
+                              value ? value.value : ""
+                            );
 
-                            formik.setFieldValue('st_level', studentLevel)
+                            formik.setFieldValue("st_level", studentLevel);
                           }}
                           onBlur={(evt) => {
-                            formik.setFieldTouched('st_class', true, true)
+                            formik.setFieldTouched("st_class", true, true);
                           }}
                           options={categoryList}
                           isClearable
@@ -749,15 +764,15 @@ const StudentCommonEditForm = (props) => {
                           placeholder="Select Division"
                           value={selectedDivsion}
                           onChange={(value) => {
-                            handleFormValueChange(value)
-                            setSelectedDivsion(value)
+                            handleFormValueChange(value);
+                            setSelectedDivsion(value);
                             formik.setFieldValue(
-                              'st_division',
-                              value ? value.value : '',
-                            )
+                              "st_division",
+                              value ? value.value : ""
+                            );
                           }}
                           onBlur={(evt) => {
-                            formik.setFieldTouched('st_division', true, true)
+                            formik.setFieldTouched("st_division", true, true);
                           }}
                           options={divisions}
                           isClearable
@@ -806,15 +821,15 @@ const StudentCommonEditForm = (props) => {
                           placeholder="Select School"
                           value={selectedSchool}
                           onChange={(value) => {
-                            handleFormValueChange(value)
-                            setSelectedSchool(value)
+                            handleFormValueChange(value);
+                            setSelectedSchool(value);
                             formik.setFieldValue(
-                              'st_schoolId',
-                              value ? value.value : '',
-                            )
+                              "st_schoolId",
+                              value ? value.value : ""
+                            );
                           }}
                           onBlur={(evt) => {
-                            formik.setFieldTouched('st_schoolId', true, true)
+                            formik.setFieldTouched("st_schoolId", true, true);
                           }}
                           options={schoolDropdownValues}
                           isClearable
@@ -841,14 +856,14 @@ const StudentCommonEditForm = (props) => {
                       className={`form-control common-input ${
                         formik.errors.st_parentName &&
                         formik.touched.st_parentName
-                          ? 'form-err'
-                          : ''
+                          ? "form-err"
+                          : ""
                       }`}
                       name="st_parentName"
                       value={formik.values.st_parentName}
                       onChange={(e) => {
-                        formik.handleChange(e)
-                        handleFormValueChange(e)
+                        formik.handleChange(e);
+                        handleFormValueChange(e);
                       }}
                       placeholder="Enter parent name"
                     />
@@ -868,15 +883,15 @@ const StudentCommonEditForm = (props) => {
                         className={`form-control common-input select-country ${
                           formik.errors.st_parentCountryCode &&
                           formik.touched.st_parentCountryCode
-                            ? 'form-err'
-                            : ''
+                            ? "form-err"
+                            : ""
                         } pe-0`}
                         as="select"
                         name="st_parentCountryCode"
                         value={formik.values.st_parentCountryCode}
                         onChange={(e) => {
-                          formik.handleChange(e)
-                          handleFormValueChange(e)
+                          formik.handleChange(e);
+                          handleFormValueChange(e);
                         }}
                         placeholder="Enter Country Code"
                       >
@@ -886,7 +901,7 @@ const StudentCommonEditForm = (props) => {
                     </div>
                     <div className="col-md-9">
                       <label htmlFor="" className="form-label">
-                        Parent mobile number{' '}
+                        Parent mobile number{" "}
                         <span className="text-danger">*</span>
                       </label>
                       <div className="input--group">
@@ -895,15 +910,15 @@ const StudentCommonEditForm = (props) => {
                           className={`form-control common-input ${
                             formik.errors.st_parentPhoneNumber &&
                             formik.touched.st_parentPhoneNumber
-                              ? 'form-err'
-                              : ''
+                              ? "form-err"
+                              : ""
                           }`}
                           name="st_parentPhoneNumber"
                           value={formik.values.st_parentPhoneNumber}
                           type="number"
                           onChange={(e) => {
-                            formik.handleChange(e)
-                            handleFormValueChange(e)
+                            formik.handleChange(e);
+                            handleFormValueChange(e);
                           }}
                           placeholder="Enter parent phone"
                         />
@@ -928,14 +943,14 @@ const StudentCommonEditForm = (props) => {
                       className={`form-control common-input ${
                         formik.errors.st_parentEmail &&
                         formik.touched.st_parentEmail
-                          ? 'form-err'
-                          : ''
+                          ? "form-err"
+                          : ""
                       }`}
                       name="st_parentEmail"
                       value={formik.values.st_parentEmail}
                       onChange={(e) => {
-                        formik.handleChange(e)
-                        handleFormValueChange(e)
+                        formik.handleChange(e);
+                        handleFormValueChange(e);
                       }}
                       placeholder="Enter Parent Email"
                     />
@@ -967,25 +982,25 @@ const StudentCommonEditForm = (props) => {
             </Form>
           </Formik>
         )}
-        {(userInfo?.userType === 'Teacher' ||
-          userInfo?.userType === 'Freelance') && (
+        {(userInfo?.userType === "Teacher" ||
+          userInfo?.userType === "Freelance") && (
           <Formik enableReinitialize={true}>
             <Form
               style={
                 isLoading
                   ? {
-                      position: 'relative',
-                      opacity: '0.8',
-                      minHeight: '600px',
+                      position: "relative",
+                      opacity: "0.8",
+                      minHeight: "600px",
                     }
                   : {}
               }
               className="profile-form my-4 py-2"
               autoComplete="off"
               onSubmit={(e) => {
-                e.preventDefault()
-                teacherFormik.handleSubmit(e)
-                return false
+                e.preventDefault();
+                teacherFormik.handleSubmit(e);
+                return false;
               }}
             >
               {isLoading ? (
@@ -1012,13 +1027,15 @@ const StudentCommonEditForm = (props) => {
                         {imageList.length === 0 && (
                           <>
                             <div className="update-image-container">
-                              <img
+                              <Image
                                 src={
                                   teacherForm?.tc_profilePic_old
                                     ? `${IMAGE_URL}/${teacherForm?.tc_profilePic_old}`
                                     : default_icon
                                 }
                                 alt={teacherForm?.tc_fullName}
+                                width={100}
+                                height={100}
                               />
                               <label
                                 className="upload-icon"
@@ -1032,7 +1049,7 @@ const StudentCommonEditForm = (props) => {
                         <div className="upload__image-wrapper">
                           {imageList.map((image, index) => (
                             <div key={index} className="image-item">
-                              <img src={image['data_url']} alt="" />
+                              <Image src={image["data_url"]} alt="" />
                               <button
                                 onClick={() => onImageRemove(index)}
                                 className="remove-btn"
@@ -1055,14 +1072,14 @@ const StudentCommonEditForm = (props) => {
                       className={`form-control common-input ${
                         teacherFormik.errors.tc_fullName &&
                         teacherFormik.touched.tc_fullName
-                          ? 'form-err'
-                          : ''
+                          ? "form-err"
+                          : ""
                       }`}
                       name="tc_fullName"
                       type="text"
                       onChange={(e) => {
-                        teacherFormik.handleChange(e)
-                        handleFormValueChange(e)
+                        teacherFormik.handleChange(e);
+                        handleFormValueChange(e);
                       }}
                       onBlur={teacherFormik.handleBlur}
                       placeholder="First Middle Last"
@@ -1087,15 +1104,15 @@ const StudentCommonEditForm = (props) => {
                       className={`form-control common-input ${
                         teacherFormik.errors.tc_email &&
                         teacherFormik.touched.tc_email
-                          ? 'form-err'
-                          : ''
+                          ? "form-err"
+                          : ""
                       }`}
                       name="tc_email"
                       disabled={true}
                       value={teacherFormik.values.tc_email}
                       onChange={(e) => {
-                        teacherFormik.handleChange(e)
-                        handleFormValueChange(e)
+                        teacherFormik.handleChange(e);
+                        handleFormValueChange(e);
                       }}
                       placeholder="Enter Email"
                     />
@@ -1111,8 +1128,8 @@ const StudentCommonEditForm = (props) => {
                   </div>
 
                   <label htmlFor="" className="form-label">
-                    Alternative Email{' '}
-                    {userInfo?.userType === 'Teacher' && (
+                    Alternative Email{" "}
+                    {userInfo?.userType === "Teacher" && (
                       <span className="text-danger">*</span>
                     )}
                   </label>
@@ -1121,14 +1138,14 @@ const StudentCommonEditForm = (props) => {
                       className={`form-control common-input ${
                         teacherFormik.errors.tc_altEmail &&
                         teacherFormik.touched.tc_altEmail
-                          ? 'form-err'
-                          : ''
+                          ? "form-err"
+                          : ""
                       }`}
                       name="tc_altEmail"
                       value={teacherFormik.values.tc_altEmail}
                       onChange={(e) => {
-                        teacherFormik.handleChange(e)
-                        handleFormValueChange(e)
+                        teacherFormik.handleChange(e);
+                        handleFormValueChange(e);
                       }}
                       placeholder="Enter your NTC email address"
                     />
@@ -1151,15 +1168,15 @@ const StudentCommonEditForm = (props) => {
                         className={`form-control common-input select-country ${
                           teacherFormik.errors.tc_countryCode &&
                           teacherFormik.touched.tc_countryCode
-                            ? 'form-err'
-                            : ''
+                            ? "form-err"
+                            : ""
                         } pe-0`}
                         as="select"
                         name="tc_countryCode"
                         value={teacherFormik.values.tc_countryCode}
                         onChange={(e) => {
-                          teacherFormik.handleChange(e)
-                          handleFormValueChange(e)
+                          teacherFormik.handleChange(e);
+                          handleFormValueChange(e);
                         }}
                         placeholder="Enter Country Code"
                       >
@@ -1177,15 +1194,15 @@ const StudentCommonEditForm = (props) => {
                           className={`form-control common-input ${
                             teacherFormik.errors.tc_phoneNumber &&
                             teacherFormik.touched.tc_phoneNumber
-                              ? 'form-err'
-                              : ''
+                              ? "form-err"
+                              : ""
                           }`}
                           name="tc_phoneNumber"
                           value={teacherFormik.values.tc_phoneNumber}
                           type="number"
                           onChange={(e) => {
-                            teacherFormik.handleChange(e)
-                            handleFormValueChange(e)
+                            teacherFormik.handleChange(e);
+                            handleFormValueChange(e);
                           }}
                           placeholder="Enter Phone"
                         />
@@ -1201,7 +1218,7 @@ const StudentCommonEditForm = (props) => {
                       </div>
                     </div>
                   </div>
-                  {userInfo?.userType === 'Teacher' && (
+                  {userInfo?.userType === "Teacher" && (
                     <div className="row mb-4">
                       <div className="col-md-6">
                         <label htmlFor="" className="form-label">
@@ -1212,14 +1229,14 @@ const StudentCommonEditForm = (props) => {
                             className={`form-control common-input ${
                               teacherFormik.errors.tc_alsoKnownAs &&
                               teacherFormik.touched.tc_alsoKnownAs
-                                ? 'form-err'
-                                : ''
+                                ? "form-err"
+                                : ""
                             }`}
                             name="tc_alsoKnownAs"
                             type="text"
                             onChange={(e) => {
-                              teacherFormik.handleChange(e)
-                              handleFormValueChange(e)
+                              teacherFormik.handleChange(e);
+                              handleFormValueChange(e);
                             }}
                             onBlur={teacherFormik.handleBlur}
                             placeholder="Enter also known as"
@@ -1246,14 +1263,14 @@ const StudentCommonEditForm = (props) => {
                             className={`form-control common-input ${
                               teacherFormik.errors.tc_staffId &&
                               teacherFormik.touched.tc_staffId
-                                ? 'form-err'
-                                : ''
+                                ? "form-err"
+                                : ""
                             }`}
                             name="tc_staffId"
                             value={teacherFormik.values.tc_staffId}
                             onChange={(e) => {
-                              teacherFormik.handleChange(e)
-                              handleFormValueChange(e)
+                              teacherFormik.handleChange(e);
+                              handleFormValueChange(e);
                             }}
                             placeholder="Enter Staff Id"
                           />
@@ -1280,19 +1297,19 @@ const StudentCommonEditForm = (props) => {
                           placeholder="Select Level"
                           value={selectedLevel}
                           onChange={(value) => {
-                            handleFormValueChange(value)
-                            setselectedLevel(value)
+                            handleFormValueChange(value);
+                            setselectedLevel(value);
                             teacherFormik.setFieldValue(
-                              'tc_level',
-                              value ? value.value : '',
-                            )
+                              "tc_level",
+                              value ? value.value : ""
+                            );
                           }}
                           onBlur={(evt) => {
                             teacherFormik.setFieldTouched(
-                              'tc_level',
+                              "tc_level",
                               true,
-                              true,
-                            )
+                              true
+                            );
                           }}
                           options={levels}
                           isClearable
@@ -1311,7 +1328,7 @@ const StudentCommonEditForm = (props) => {
                     </div>
                     <div className="col-md-6">
                       <label htmlFor="" className="form-label">
-                        Years Of Experience{' '}
+                        Years Of Experience{" "}
                         <span className="text-danger">*</span>
                       </label>
                       <div className="input--group">
@@ -1321,19 +1338,19 @@ const StudentCommonEditForm = (props) => {
                           placeholder="Years Of Experience"
                           value={selectedExperience}
                           onChange={(value) => {
-                            handleFormValueChange(value)
-                            setSelectedExperience(value)
+                            handleFormValueChange(value);
+                            setSelectedExperience(value);
                             teacherFormik.setFieldValue(
-                              'tc_experience',
-                              value ? value.value : '',
-                            )
+                              "tc_experience",
+                              value ? value.value : ""
+                            );
                           }}
                           onBlur={(evt) => {
                             teacherFormik.setFieldTouched(
-                              'tc_experience',
+                              "tc_experience",
                               true,
-                              true,
-                            )
+                              true
+                            );
                           }}
                           options={yearsOfExperience}
                           isClearable
@@ -1363,19 +1380,19 @@ const StudentCommonEditForm = (props) => {
                           placeholder="Select Certificates"
                           value={selectedCertificate}
                           onChange={(value) => {
-                            handleFormValueChange(value)
-                            setSelectedCertificate(value)
+                            handleFormValueChange(value);
+                            setSelectedCertificate(value);
                             teacherFormik.setFieldValue(
-                              'tc_certificate',
-                              value ? value.value : '',
-                            )
+                              "tc_certificate",
+                              value ? value.value : ""
+                            );
                           }}
                           onBlur={(evt) => {
                             teacherFormik.setFieldTouched(
-                              'tc_certificate',
+                              "tc_certificate",
                               true,
-                              true,
-                            )
+                              true
+                            );
                           }}
                           options={certificateList}
                           isClearable
@@ -1425,19 +1442,19 @@ const StudentCommonEditForm = (props) => {
                             placeholder="Select School"
                             value={selectedSchool}
                             onChange={(value) => {
-                              handleFormValueChange(value)
-                              setSelectedSchool(value)
+                              handleFormValueChange(value);
+                              setSelectedSchool(value);
                               teacherFormik.setFieldValue(
-                                'tc_schoolId',
-                                value ? value.value : '',
-                              )
+                                "tc_schoolId",
+                                value ? value.value : ""
+                              );
                             }}
                             onBlur={(evt) => {
                               teacherFormik.setFieldTouched(
-                                'tc_schoolId',
+                                "tc_schoolId",
                                 true,
-                                true,
-                              )
+                                true
+                              );
                             }}
                             options={schoolDropdownValues}
                             isClearable
@@ -1460,7 +1477,7 @@ const StudentCommonEditForm = (props) => {
                     <div className="col-md-12">
                       <div className="input--group">
                         <label htmlFor="" className="form-label">
-                          Languages Spoken{' '}
+                          Languages Spoken{" "}
                           <span className="text-danger">*</span>
                         </label>
                         <div className="input--group">
@@ -1471,19 +1488,19 @@ const StudentCommonEditForm = (props) => {
                             placeholder="Select Languages"
                             value={selectedLanguages}
                             onChange={(value) => {
-                              handleFormValueChange(value)
-                              setSelectedLanguages(value)
+                              handleFormValueChange(value);
+                              setSelectedLanguages(value);
                               teacherFormik.setFieldValue(
-                                'tc_languageSpoken',
-                                value ? value : '',
-                              )
+                                "tc_languageSpoken",
+                                value ? value : ""
+                              );
                             }}
                             onBlur={(evt) => {
                               teacherFormik.setFieldTouched(
-                                'tc_languageSpoken',
+                                "tc_languageSpoken",
                                 true,
-                                true,
-                              )
+                                true
+                              );
                             }}
                             options={languages}
                             isClearable
@@ -1510,15 +1527,15 @@ const StudentCommonEditForm = (props) => {
                       className={`form-control common-input ${
                         teacherFormik.errors.tc_briefProfile &&
                         teacherFormik.touched.tc_briefProfile
-                          ? 'form-err'
-                          : ''
+                          ? "form-err"
+                          : ""
                       }`}
                       component="textarea"
                       name="tc_briefProfile"
                       value={teacherFormik.values.tc_briefProfile}
                       onChange={(e) => {
-                        teacherFormik.handleChange(e)
-                        handleFormValueChange(e)
+                        teacherFormik.handleChange(e);
+                        handleFormValueChange(e);
                       }}
                       placeholder="Enter brief profile"
                     />
@@ -1549,12 +1566,12 @@ const StudentCommonEditForm = (props) => {
         )}
       </>
     </>
-  )
-}
+  );
+};
 
 StudentCommonEditForm.propTypes = {
   toggle: PropTypes.func,
   isOpen: PropTypes.bool,
-}
+};
 
-export default StudentCommonEditForm
+export default StudentCommonEditForm;

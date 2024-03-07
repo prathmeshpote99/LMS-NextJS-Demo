@@ -1,5 +1,5 @@
-import { getFullUserInfo } from 'helpers/authHelper'
-import { getPracticeQuestions } from 'helpers/backendHelpers/allQuestions'
+import { getFullUserInfo } from '@/helpers/authHelper'
+import { getPracticeQuestions } from '@/helpers/backendHelpers/allQuestions'
 import { useEffect, useState } from 'react'
 import QuestionsMCQTest from './QuestionsMCQTest'
 import SubmitLoader from './SubmitLoader'

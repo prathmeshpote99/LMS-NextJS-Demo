@@ -1,8 +1,8 @@
-import { getUserInfo } from 'helpers/authHelper'
+import { getUserInfo } from '@/helpers/authHelper'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import { Button, Modal, ModalBody, ModalHeader } from 'reactstrap'
-import { IMAGE_URL } from '../../helpers/urlHelper'
+import { IMAGE_URL } from '@/helpers/urlHelper'
 import PracticeQuestionsContent from './PractiseQuestionsContent'
 
 const VideoContent = ({ video }) => (

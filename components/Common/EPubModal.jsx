@@ -1,8 +1,8 @@
-import { getUserInfo } from 'helpers/authHelper'
-import ReaderWrapper from 'pages/EPub/container/Reader'
+import { getUserInfo } from '@/helpers/authHelper'
+// import ReaderWrapper from 'pages/EPub/container/Reader'
 import { useState } from 'react'
 import { Button, Modal, ModalBody, ModalHeader } from 'reactstrap'
-import { IMAGE_URL } from '../../helpers/urlHelper'
+import { IMAGE_URL } from '@/helpers/urlHelper'
 import PracticeQuestionsContent from './PractiseQuestionsContent'
 
 const EPubModal = ({ isOpen, ePubUrl, toggle, book }) => {

@@ -1,0 +1,224 @@
+:root {
+  --base: #00bee3;
+  --title: #111d5e;
+  --text: #565656;
+  --section: #ebebeb;
+  --white: #ffffff;
+  --body: 'Poppins', sans-serif;
+}
+.training-programe-details {
+  .top-img {
+    img {
+      width: 100%;
+      max-height: 465px;
+      object-fit: cover;
+    }
+    .event-meta {
+      font-size: 14px;
+      svg {
+        font-size: 17px;
+        color: var(--base);
+        margin-right: 5px;
+      }
+      span {
+        display: flex;
+        align-items: center;
+        &:not(:last-child) {
+          margin-right: 20px;
+        }
+      }
+      margin-top: 25px;
+    }
+  }
+  .title {
+    margin: 0;
+    margin-bottom: 18px;
+  }
+}
+.visual-list {
+  font-size: 30px;
+  color: var(--base);
+  h6 {
+    margin: 0;
+    margin-bottom: 5px;
+  }
+  div {
+    color: var(--text);
+    font-size: 14px;
+  }
+  li {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+}
+.tags-area {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  .tags,
+  .share {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 5px;
+    h6 {
+      margin: 0;
+      margin-right: 10px;
+    }
+  }
+  .tags {
+    ul {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        &:not(:last-child) {
+          margin-right: 10px;
+          &::after {
+            content: ',';
+          }
+        }
+      }
+    }
+  }
+}
+.comments-list-items {
+  padding: 0;
+  margin: 0;
+  margin-top: 30px;
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    &:not(:last-child) {
+      padding-bottom: 30px;
+      border-bottom: 1px solid #f4f4f4;
+    }
+    &:not(:first-child) {
+      padding-top: 30px;
+    }
+    img {
+      width: 80px;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .cont {
+      width: calc(100% - 80px);
+      padding-left: 20px;
+    }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 10px;
+      .cmn--btn {
+        padding: 8px 15px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+      .name {
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+      .date {
+        font-size: 14px;
+        margin-bottom: 10px;
+        display: block;
+      }
+    }
+    @media (max-width: 425px) {
+      font-size: 14px;
+      img {
+        width: 30px;
+      }
+      .cont {
+        padding-left: 10px;
+        width: calc(100% - 30px);
+        .name {
+          font-size: 15px;
+        }
+        .date {
+          font-size: 12px;
+        }
+        .cmn--btn {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+.comment-title {
+  @media (min-width: 576px) {
+    font-size: 26px;
+    font-weight: 600;
+  }
+}
+textarea.form-control {
+  height: 130px;
+}
+.teacher-list {
+  img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+  }
+}
+// .blog-main-section {
+//   // background: #ffffff;
+//   // box-shadow: 3px -5px 40px rgb(154 151 142 / 15%);
+//   // border-radius: 8px;
+// }
+.icon-color {
+  svg {
+    color: var(--base);
+  }
+}
+.icon {
+  svg {
+    font-size: 20px;
+  }
+}
+.comment-input {
+  input {
+    border-radius: 50px;
+  }
+}
+// .comment-btn {
+// 	top:15%;
+// 	right:3%;
+// 	display: inline-block;
+// 	background: var(--base);
+// 	color: var(--white);
+// 	border-radius: 30px;
+// 	padding: 8px 20px;
+// 	font-size: 14px;
+// 	border: 1px solid transparent;
+// 	text-transform: capitalize;
+// 	transition: all ease 0.3s;
+
+// 	&:hover {
+// 	  background: var(--title);
+// 	  border-color: var(--base);
+// 	  color: var(--base);
+// 	}
+
+//   }
+.margin-y-30 {
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+}
+.single-blog {
+  .blog-img {
+    max-height: 320px;
+  }
+}

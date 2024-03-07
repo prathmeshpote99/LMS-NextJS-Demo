@@ -1,66 +1,61 @@
-import { encryptId, getAuthToken } from 'helpers/authHelper'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import swal from 'sweetalert'
-import default_card_img from '../assets/images/default_card_img.png'
-import { IMAGE_URL } from '../helpers/urlHelper'
+import { encryptId, getAuthToken } from "@/helpers/authHelper";
+import Link from "next/link";
+import swal from "sweetalert";
+import default_card_img from "@/assets/images/default_card_img.png";
+import { IMAGE_URL } from "@/helpers/urlHelper";
+import { useRouter } from "next/router";
+import Image from "next/image";
 
-const EventCard = ({
-  tp_typeOfProgram,
-  tp_programImage,
-  tp_id,
-  tp_createdAt,
-  tp_programTitle,
-  tp_description,
-  classes,
-}) => {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const pathName = location.pathname
+const EventCard = ({ tp_programImage, tp_id, tp_programTitle, classes }) => {
+  const router = useRouter();
+  const pathName = router.pathname;
 
   const LoginAlert = async () => {
-    const value = await swal('Please do login into your account', {
+    const value = await swal("Please do login into your account", {
       buttons: {
-        defeat: 'Log in',
-        cancel: 'Cancel',
+        defeat: "Log in",
+        cancel: "Cancel",
       },
-    })
+    });
     switch (value) {
-      case 'defeat':
-        navigate('/auth/signin', {
+      case "defeat":
+        router.push("/auth/signin", {
           state: {
             url: pathName,
           },
-        })
-        break
+        });
+        break;
       default:
     }
-  }
+  };
 
   const handleTrainingDetailsPage = async () => {
-    const isLoggedIn = getAuthToken() ? true : false
-    const encryptedId = await encryptId(tp_id)
+    const isLoggedIn = getAuthToken() ? true : false;
+    const encryptedId = await encryptId(tp_id);
     if (!isLoggedIn) {
-      LoginAlert()
+      LoginAlert();
     } else {
-      return navigate(`/training-program/${encryptedId}`)
+      return router.push(`/training-program/${encryptedId}`);
     }
-  }
+  };
 
   return (
     <div className={`event__card h-100 bg-white ${classes}`}>
       <div className="event__card-img">
-        <Link to={`#`}>
+        <Link href={`#`}>
           {tp_programImage ? (
-            <img
+            <Image
+              height={50}
+              width={50}
               src={`${IMAGE_URL}/${tp_programImage}`}
               alt=""
-              onClick={() => handleTrainingDetailsPage()}
+              // onClick={() => handleTrainingDetailsPage()}
             />
           ) : (
-            <img
+            <Image
               src={default_card_img}
               alt=""
-              onClick={() => handleTrainingDetailsPage()}
+              // onClick={() => handleTrainingDetailsPage()}
             />
           )}
         </Link>
@@ -94,7 +89,7 @@ const EventCard = ({
         </div> */}
         <h5
           className="title cursor-pointer"
-          onClick={() => handleTrainingDetailsPage()}
+          // onClick={() => handleTrainingDetailsPage()}
         >
           {tp_programTitle}
         </h5>
@@ -106,13 +101,13 @@ const EventCard = ({
         </button> */}
         <span
           className="training-detail-btn d-flex justify-content-end me-3 cursor-pointer"
-          onClick={() => handleTrainingDetailsPage()}
+          // onClick={() => handleTrainingDetailsPage()}
         >
           Details
         </span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EventCard
+export default EventCard;

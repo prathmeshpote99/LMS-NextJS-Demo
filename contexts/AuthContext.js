@@ -3,6 +3,7 @@ export const AuthContext = createContext()
 
 const AuthContextProvider = (props) => {
   const [isAuthenticated, setAuthenticated] = useState(false)
+  const [loading, setLoading] = useState(false)
   const isLoggedIn = typeof window !== 'undefined' ? localStorage.getItem("authToken") : null;
   const userInfo = typeof window !== 'undefined' ? localStorage.getItem("userInfo") : null;
   const [temp, setTemp] = useState(true)
@@ -29,6 +30,8 @@ const AuthContextProvider = (props) => {
         setPathUrl,
         setPathUrl,
         url,
+        loading,
+        setLoading
       }}
     >
       {props.children}
@@ -36,3 +39,8 @@ const AuthContextProvider = (props) => {
   )
 }
 export default AuthContextProvider
+export function useLoading() {
+  return useContext(AuthContext);
+}
+
+

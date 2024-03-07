@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 const Pagination = ({
   limit,
@@ -59,7 +59,7 @@ const Pagination = ({
                 setSelectedPageNumberForPrev(apiCurrentPage - 1)
               }
             }}
-            to="#"
+            href="#"
           >
             {'<<'}
           </Link>
@@ -70,7 +70,7 @@ const Pagination = ({
               paginate(currentPage - 1)
               setSelectedCurrentPageIndex(selectedCurrentPageIndex - 1)
             }}
-            to="#"
+            href="#"
             className={`page-link ${
               selectedCurrentPageIndex === 0 ? 'nextPageDisable' : ''
             }`}
@@ -86,7 +86,7 @@ const Pagination = ({
                   paginate(number)
                   setSelectedCurrentPageIndex(i)
                 }}
-                to="#"
+                href="#"
                 className={`page-link pagination-btn ${
                   currentPage === number ? 'currentPageSelected' : ''
                 }`}
@@ -107,7 +107,7 @@ const Pagination = ({
               paginate(currentPage + 1)
               setSelectedCurrentPageIndex(selectedCurrentPageIndex + 1)
             }}
-            to="#"
+            href="#"
           >
             {'>'}
           </Link>
@@ -130,7 +130,7 @@ const Pagination = ({
                 setSelectedPageNumber(apiCurrentPage)
               }
             }}
-            to="#"
+            href="#"
           >
             {'>>'}
           </Link>

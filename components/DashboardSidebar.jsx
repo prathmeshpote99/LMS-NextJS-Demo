@@ -1,72 +1,74 @@
-import { useContext, useState } from 'react'
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
-import swal from 'sweetalert'
-import dashboard_menu from '../assets/images/data/dashboard-menu'
-import { AuthContext } from '../contexts/AuthContext'
-import { removeAuthInfo } from '../helpers/authHelper'
+import { useContext, useState } from "react";
+import Link from "next/link";
+import swal from "sweetalert";
+import dashboard_menu from "@/assets/images/data/dashboard-menu";
+import { AuthContext } from "@/contexts/AuthContext";
+import { removeAuthInfo } from "@/helpers/authHelper";
 import {
   logOutParent,
   logOutPublisher,
   logOutUser,
   logOutfTeacher,
-} from '../helpers/backendHelper'
+} from "@/helpers/backendHelper";
+import { useRouter } from "next/router";
 
 const DashboardSidebar = () => {
-  const { setLogout, userInfo } = useContext(AuthContext)
+  const { setLogout, userInfo } = useContext(AuthContext);
 
-  const [temp, setTemp] = useState(false)
-  const navigate = useNavigate()
-  const location = useLocation()
-  const pathName = location.pathname
+  const [temp, setTemp] = useState(false);
+  // const navigate = useNavigate();
+  const router = useRouter();
+  // const location = useLocation();
+  const pathName = router.pathname;
 
   const handleLogout = async () => {
-    const value = await swal('Are you sure you want to logout?', {
+    const value = await swal("Are you sure you want to logout?", {
       buttons: {
-        defeat: 'Log out',
-        cancel: 'Cancel',
+        defeat: "Log out",
+        cancel: "Cancel",
       },
-    })
+    });
 
-    if (value === 'defeat') {
-      if (userInfo === 'Student') {
-        logOutUser()
-      } else if (userInfo === 'Teacher') {
-        logOutfTeacher()
-      } else if (userInfo === 'Parent') {
-        logOutParent()
-      } else if (userInfo === 'Publisher') {
-        logOutPublisher()
+    if (value === "defeat") {
+      if (userInfo === "Student") {
+        logOutUser();
+      } else if (userInfo === "Teacher") {
+        logOutfTeacher();
+      } else if (userInfo === "Parent") {
+        logOutParent();
+      } else if (userInfo === "Publisher") {
+        logOutPublisher();
       }
-      removeAuthInfo()
-      setLogout()
-      navigate('/auth/signin', {
+      removeAuthInfo();
+      setLogout();
+      router.push("/auth/signin", {
         state: {
           url: pathName,
         },
-      })
-      setTemp(!temp)
+      });
+      setTemp(!temp);
     }
-  }
+  };
 
   return (
     <>
       <div className="dashboard-sidebar">
         <div className="dashboard-sidebar-inner">
-          <h5 className="title" style={{ color: 'black' }}>
+          <h5 className="title" style={{ color: "black" }}>
             My Account
           </h5>
           {dashboard_menu && (
             <ul>
               {dashboard_menu.map(({ title, link, icon }, i) => (
                 <li key={i}>
-                  {link === '#logout' ? (
+                  {link === "#logout" ? (
                     <span className="menu-link" onClick={handleLogout}>
                       {icon} {title}
                     </span>
                   ) : (
-                    <NavLink to={link}>
+                    <Link href={link}>
                       {icon} {title}
-                    </NavLink>
+                    </Link>
                   )}
                 </li>
               ))}
@@ -75,7 +77,7 @@ const DashboardSidebar = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default DashboardSidebar
+export default DashboardSidebar;

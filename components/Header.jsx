@@ -8,8 +8,8 @@ import dashboard_header_menu, {
   dashboard_header_student_menu,
 } from "@/assets/images/data/menu2";
 import default_icon from "@/assets/images/default_avatar.png";
-import logo from "@/assets/images/logo/MOE_Logoo.png";
-import { AuthContext } from "../contexts/AuthContext";
+import logo from "@/assets/images/logo/MOE_Logoo.png";``
+import { AuthContext, useLoading } from "../contexts/AuthContext";
 import { getUserInfo, removeAuthInfo } from "@/helpers/authHelper";
 import {
   logOutParent,
@@ -24,6 +24,8 @@ import Image from "next/image";
 
 const Header = (props) => {
   // const navigate = useNavigate()
+  const { loading, setLoading } = useLoading();
+
   const router = useRouter();
   const userInfo = getUserInfo();
 
@@ -184,7 +186,7 @@ const Header = (props) => {
                       },
                       i
                     ) => (
-                      <React.Fragment key={i}>
+                      <React.Fragment key={text}>
                         <li
                           style={{
                             ...style,
@@ -197,24 +199,24 @@ const Header = (props) => {
                               setMainMenuValue(mainMenuSlug);
                             }}
                           >
-                            <span
+                            {/* <span
                               className={
                                 selectedMenu === mainMenuSlug ||
                                 pathName.includes(mainMenuSlug)
                                   ? "selected-group"
                                   : ""
                               }
-                            >
-                              {icon && (
-                                <Image
-                                  className="language-img"
-                                  src={icon}
-                                  alt=""
-                                  style={{ marginRight: "5px", height: "13px" }}
-                                />
-                              )}
-                              {text}
-                            </span>
+                            > */}
+                            {icon && (
+                              <Image
+                                className="language-img"
+                                src={icon}
+                                alt=""
+                                style={{ marginRight: "5px", height: "13px" }}
+                              />
+                            )}
+                            {text}
+                            {/* </span> */}
                             {sub_menu && <FaAngleDown />}
                           </Link>
                           {sub_menu && (
@@ -240,7 +242,7 @@ const Header = (props) => {
                                 })
                                 .map(
                                   ({ text, link, tabName, subMenuSlug }, i) => (
-                                    <React.Fragment key={i}>
+                                    <React.Fragment key={text}>
                                       <li>
                                         <Link
                                           className={
@@ -286,7 +288,7 @@ const Header = (props) => {
                       },
                       i
                     ) => (
-                      <React.Fragment key={i}>
+                      <React.Fragment key={text}>
                         <li
                           style={{
                             ...style,
@@ -299,23 +301,23 @@ const Header = (props) => {
                               setMainMenuValue(mainMenuSlug);
                             }}
                           >
-                            <span
+                            {/* <span
                               className={
                                 selectedMenu === mainMenuSlug
                                   ? "selected-group"
                                   : ""
                               }
-                            >
-                              {icon && (
-                                <Image
-                                  className="language-img"
-                                  src={icon}
-                                  alt=""
-                                  style={{ marginRight: "5px", height: "13px" }}
-                                />
-                              )}
-                              {text}
-                            </span>
+                            > */}
+                            {icon && (
+                              <Image
+                                className="language-img"
+                                src={icon}
+                                alt=""
+                                style={{ marginRight: "5px", height: "13px" }}
+                              />
+                            )}
+                            {text}
+                            {/* </span> */}
                             {sub_menu && <FaAngleDown />}
                             {!isLoggedIn
                               ? joinUssub_menu && <FaAngleDown />
@@ -343,7 +345,7 @@ const Header = (props) => {
                                   return true;
                                 })
                                 .map(({ text, link, subMenuSlug }, i) => (
-                                  <li key={i}>
+                                  <li key={text}>
                                     <Link
                                       className={
                                         selectedSubMenu === subMenuSlug
@@ -368,7 +370,7 @@ const Header = (props) => {
                           {joinUssub_menu && (
                             <ul className="submenu">
                               {joinUssub_menu.map(({ text, link }, i) => (
-                                <li key={i}>
+                                <li key={text}>
                                   <Link href={link}>{text}</Link>
                                 </li>
                               ))}
@@ -393,7 +395,7 @@ const Header = (props) => {
                       },
                       i
                     ) => (
-                      <React.Fragment key={i}>
+                      <React.Fragment key={text}>
                         <li
                           style={{
                             ...style,
@@ -406,23 +408,23 @@ const Header = (props) => {
                               setMainMenuValue(mainMenuSlug);
                             }}
                           >
-                            <span
+                            {/* <span
                               className={
                                 selectedMenu === mainMenuSlug
                                   ? "selected-group"
                                   : ""
                               }
-                            >
-                              {icon && (
-                                <Image
-                                  className="language-img"
-                                  src={icon}
-                                  alt=""
-                                  style={{ marginRight: "5px", height: "13px" }}
-                                />
-                              )}
-                              {text}
-                            </span>
+                            > */}
+                            {icon && (
+                              <Image
+                                className="language-img"
+                                src={icon}
+                                alt=""
+                                style={{ marginRight: "5px", height: "13px" }}
+                              />
+                            )}
+                            {text}
+                            {/* </span> */}
                             {sub_menu && <FaAngleDown />}
                             {!isLoggedIn
                               ? joinUssub_menu && <FaAngleDown />
@@ -450,7 +452,7 @@ const Header = (props) => {
                                   return true;
                                 })
                                 .map(({ text, link, subMenuSlug }, i) => (
-                                  <li key={i}>
+                                  <li key={text}>
                                     <Link
                                       className={
                                         selectedSubMenu === subMenuSlug
@@ -475,7 +477,7 @@ const Header = (props) => {
                           {joinUssub_menu && (
                             <ul className="submenu">
                               {joinUssub_menu.map(({ text, link }, i) => (
-                                <li key={i}>
+                                <li key={text}>
                                   <Link href={link}>{text}</Link>
                                 </li>
                               ))}
@@ -496,8 +498,8 @@ const Header = (props) => {
                           handleMenuClick();
                         }}
                         style={{
-                          height: "42px",
-                          width: "42px",
+                          // height: "42px",
+                          // width: "42px",
                           borderRadius: "50%",
                         }}
                         src={
@@ -508,6 +510,8 @@ const Header = (props) => {
                             : default_icon
                         }
                         alt=""
+                        width={42}
+                        height={42}
                       />
                       <FaAngleDown />
                     </Link>
@@ -554,8 +558,8 @@ const Header = (props) => {
                   <Link href="/profile" className="p-0">
                     <Image
                       style={{
-                        height: "42px",
-                        width: "42px",
+                        // height: "42px",
+                        // width: "42px",
                         borderRadius: "50%",
                       }}
                       src={
@@ -566,6 +570,8 @@ const Header = (props) => {
                           : default_icon
                       }
                       alt=""
+                      width={42}
+                      height={42}
                     />
                     <FaAngleDown />
                   </Link>

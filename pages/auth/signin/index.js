@@ -78,7 +78,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      router.push('/library')
+      router.push('/profile')
     } else {
     }
   }, [isLoggedIn])
@@ -237,7 +237,7 @@ const SignIn = () => {
     }
     setLogin()
     setError('')
-    router.push('/library')
+    router.push('/profile')
     typeof window !== "undefined" ? localStorage.setItem('profilePic', profilePic) : null
   }
 
